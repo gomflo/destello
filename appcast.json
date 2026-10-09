@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "url": "downloads/Destello-0.1.0.dmg",
+  "size": 2206870,
+  "sha256": "ec44311146af313487c23832d3cfaec11f38f8c6c3835ed50e15c8a11b652ffb",
+  "minimum_os": "15.0",
+  "published": "2026-10-08",
+  "notes": "Primera beta pública: capturas, editor, OCR, grabación, GIF y captura con desplazamiento."
+}

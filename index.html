@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Destello · Capturas de pantalla para Mac, más rápidas que un parpadeo</title>
+<meta name="description" content="Destello es una app de capturas de pantalla para Mac. Captura, anota, copia texto, fija y graba con un atajo. Nativa, 2.1 MB, gratis durante la beta.">
+<meta name="theme-color" content="#07060b">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Destello · Capturas de pantalla para Mac">
+<meta property="og:description" content="Captura, anota, copia texto, fija y graba con un atajo. Nativa, 2.1 MB, gratis durante la beta.">
+<meta property="og:url" content="https://gomflo.github.io/destello-web/">
+<meta property="og:image" content="https://gomflo.github.io/destello-web/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/icon-64.png">
+<link rel="preload" href="fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/destello-hero.jpg" as="image">
+<style>
+/* Landing de Destello: la identidad del ícono y el promo de la app. */
+@font-face {
+  font-family: "Geist";
+  src: url(fonts/geist-latin.woff2) format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+:root {
+  --bg: #07060b;
+  --bg-2: #0f0d17;
+  --bg-3: #17141f;
+  --line: rgba(255, 255, 255, .09);
+  --line-2: rgba(255, 255, 255, .16);
+  --text: #f4f3f8;
+  --text-2: #aaa6b9;
+  --muted: #827e93;
+  --indigo: #5d5cf6;
+  --violet: #9b4df0;
+  --pink: #ec5fae;
+  --marca: linear-gradient(100deg, var(--indigo), var(--violet) 55%, var(--pink));
+  --font: "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --wrap: min(1200px, 100% - 64px);
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); color: var(--text); scroll-behavior: smooth; scroll-padding-top: 72px; color-scheme: dark; scrollbar-color: #3a3546 var(--bg); }
+body { margin: 0; font: 400 17px/1.6 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; caret-color: var(--violet); }
+::selection { background: var(--violet); color: #fff; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-underline-offset: .2em; }
+:focus-visible { outline: 2px solid #c9a9ff; outline-offset: 3px; border-radius: 8px; }
+img, video, svg { display: block; max-width: 100%; }
+.wrap { width: var(--wrap); margin-inline: auto; }
+.ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.num { font-variant-numeric: tabular-nums; }
+kbd { display: inline-grid; place-items: center; min-width: 1.75em; height: 1.75em; padding: 0 .38em; font: 600 .78em/1 var(--font); color: var(--text); background: rgba(255,255,255,.08); border: 1px solid var(--line-2); border-radius: 6px; vertical-align: .08em; }
+
+/* botones */
+.btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 26px;
+  font: 700 19px/1 var(--font); letter-spacing: -.01em; color: #fff; text-decoration: none; white-space: nowrap; cursor: pointer;
+  background: var(--marca); border: 0; border-radius: 999px; overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 10px 24px -14px rgba(0,0,0,.9);
+  transition: transform .25s var(--ease), filter .25s var(--ease);
+}
+.btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%); transform: translateX(-120%); transition: transform .7s var(--ease); }
+.btn:hover { transform: translateY(-1px); filter: brightness(1.07); }
+.btn:hover::after { transform: translateX(120%); }
+.btn .ico { width: 21px; height: 21px; stroke-width: 2.4; }
+.btn.sec { background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px var(--line-2); font-weight: 600; }
+.btn.sec::after { display: none; }
+.btn.sec:hover { background: rgba(255,255,255,.12); filter: none; }
+
+/* barra */
+.barra { position: sticky; top: 0; z-index: 30; background: rgba(7,6,11,.72); -webkit-backdrop-filter: saturate(160%) blur(16px); backdrop-filter: saturate(160%) blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.barra.scroll { border-bottom-color: var(--line); }
+.barra .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
+.marca { display: flex; align-items: center; gap: 10px; font-weight: 750; font-size: 19px; letter-spacing: -.02em; text-decoration: none; }
+.marca img { width: 30px; height: 30px; }
+.barra nav { display: flex; gap: 26px; margin-left: auto; font-size: 15px; color: var(--text-2); }
+.barra nav a { text-decoration: none; transition: color .2s; }
+.barra nav a:hover { color: var(--text); }
+.barra .btn { height: 38px; padding: 0 16px; font-size: 15px; font-weight: 650; }
+.barra .btn .ico { width: 17px; height: 17px; }
+
+/* resplandores de marca */
+.aurora { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.aurora::before, .aurora::after { content: ""; position: absolute; border-radius: 50%; }
+.aurora::before { width: 900px; height: 700px; left: 50%; top: -260px; margin-left: -700px; background: radial-gradient(closest-side, rgba(93,92,246,.42), transparent); }
+.aurora::after { width: 900px; height: 700px; left: 50%; top: -180px; margin-left: -150px; background: radial-gradient(closest-side, rgba(236,95,174,.30), transparent); }
+
+/* portada */
+.portada { position: relative; isolation: isolate; text-align: center; padding: 48px 0 0; }
+.portada .icono { position: relative; width: 84px; height: 84px; margin: 0 auto 26px; }
+.portada .icono::before { content: ""; position: absolute; inset: -70px; z-index: -1; background: radial-gradient(closest-side, rgba(155,77,240,.55), transparent); }
+.portada .icono img { width: 84px; height: 84px; }
+h1 { font-size: clamp(44px, 5.6vw, 82px); font-weight: 900; line-height: 1; letter-spacing: -.04em; max-width: 24ch; margin: 0 auto; text-wrap: balance; }
+.portada .apoyo { max-width: 620px; margin: 24px auto 0; font-size: 20px; line-height: 1.5; color: var(--text-2); text-wrap: balance; }
+.portada .apoyo b { color: var(--text); font-weight: 600; }
+.acciones { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+.requisitos { margin-top: 16px; font-size: 14.5px; color: var(--muted); }
+
+/* marcos de video */
+.marco { position: relative; border-radius: 22px; overflow: hidden; background: #0b0814; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 40px 80px -40px rgba(0,0,0,.9); }
+.marco::before { content: ""; position: absolute; z-index: 1; left: 12%; right: 12%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); }
+.marco video { width: 100%; height: auto; }
+.toma { position: relative; margin: 48px auto 0; width: min(1120px, 100%); }
+.toma .marco video { aspect-ratio: 1440 / 990; }
+.toma .flash { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.7) 50%, transparent 62%); transform: translateX(-110%); }
+.toma .chispa { position: absolute; right: 2.5%; top: 1.5%; width: 46px; height: 46px; fill: #fff; opacity: 0; pointer-events: none; }
+.toma.destella .flash { animation: barrido 1s var(--ease) .4s 1 both; }
+.toma.destella .chispa { animation: chispa .9s var(--ease) .75s 1 both; }
+@keyframes barrido { to { transform: translateX(110%); } }
+@keyframes chispa { 0% { opacity: 0; transform: scale(.2) rotate(-45deg); } 35% { opacity: 1; transform: scale(1.15) rotate(0); } 100% { opacity: 0; transform: scale(.6) rotate(20deg); } }
+
+/* secciones */
+section { position: relative; padding: 140px 0 0; }
+.cabeza { text-align: center; max-width: 760px; margin: 0 auto 48px; }
+h2 { font-size: clamp(36px, 4.8vw, 64px); font-weight: 800; line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
+.cabeza p { margin: 18px auto 0; max-width: 600px; font-size: 19px; line-height: 1.55; color: var(--text-2); text-wrap: balance; }
+.cabeza p b { color: var(--text); font-weight: 600; }
+
+/* escaparate de funciones */
+.pestanas { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin: 0 auto 28px; padding: 6px; width: fit-content; max-width: 100%; border-radius: 999px; background: rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px var(--line); }
+.pestanas button { position: relative; overflow: hidden; height: 40px; padding: 0 16px; font: 600 15px/1 var(--font); color: var(--text-2); background: transparent; border: 0; border-radius: 999px; cursor: pointer; transition: color .2s, background .2s; }
+.pestanas button:hover { color: var(--text); }
+.pestanas button[aria-selected="true"] { color: var(--text); background: rgba(255,255,255,.1); }
+.pestanas button[aria-selected="true"]::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px; height: 3px; border-radius: 2px; background: var(--marca); transform-origin: left; transform: scaleX(var(--p, 0)); }
+.escaparate-marco { width: min(1060px, 100%); margin: 0 auto; }
+.escaparate .marco video { aspect-ratio: 1440 / 990; }
+.detalle { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 40px; width: min(1000px, 100%); margin: 36px auto 0; }
+.detalle li { font-size: 16px; line-height: 1.55; color: var(--text-2); }
+.detalle b { display: block; margin-bottom: 4px; color: var(--text); font-weight: 650; font-size: 17px; }
+
+/* velocidad */
+.velocidad .panel { position: relative; padding: clamp(56px, 7vw, 96px) clamp(22px, 5vw, 72px); border-radius: 32px; overflow: hidden; color: #fff;
+  background: radial-gradient(55% 75% at 8% 0%, rgba(93,92,246,.85), transparent 70%), radial-gradient(50% 70% at 100% 100%, rgba(236,95,174,.75), transparent 70%), radial-gradient(45% 60% at 65% 15%, rgba(155,77,240,.7), transparent 70%), #120b24;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+.velocidad .panel::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .18; mix-blend-mode: overlay;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.velocidad .cabeza p { color: rgba(255,255,255,.86); }
+.velocidad .cabeza p b { color: #fff; }
+.carrera { position: relative; z-index: 1; width: min(880px, 100%); margin: 0 auto; display: grid; gap: 22px; }
+.carril { display: grid; grid-template-columns: 140px minmax(0, 1fr) 90px; align-items: center; gap: 18px; }
+.carril span { font-weight: 650; color: #fff; white-space: nowrap; }
+.carril output { text-align: right; font-weight: 700; font-size: 22px; letter-spacing: -.02em; }
+.pista { position: relative; height: 16px; border-radius: 8px; background: rgba(255,255,255,.14); overflow: hidden; }
+.pista i { position: absolute; inset: 0; border-radius: 7px; transform-origin: left; transform: scaleX(0); }
+.carril.parpadeo .pista i { background: rgba(255,255,255,.45); }
+.carril.destello .pista i { background: #fff; }
+.carrera footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 10px; font-size: 15.5px; color: rgba(255,255,255,.86); }
+.carrera footer button { font: 650 15px/1 var(--font); color: #24124d; background: #fff; border: 0; border-radius: 999px; padding: 10px 16px; cursor: pointer; }
+.carrera footer button:hover { background: #ece6ff; }
+.tramos { position: relative; z-index: 1; width: min(880px, 100%); margin: 40px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.25); display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 15.5px; color: rgba(255,255,255,.86); }
+.tramos b { color: #fff; font-weight: 700; white-space: nowrap; }
+
+/* barra de menús */
+.nativa .cuerpo { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: center; }
+.escritorio { position: relative; aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 1px var(--line-2);
+  background: radial-gradient(60% 60% at 20% 30%, rgba(93,92,246,.85), transparent 70%), radial-gradient(55% 55% at 85% 75%, rgba(236,95,174,.7), transparent 70%), radial-gradient(50% 50% at 60% 20%, rgba(155,77,240,.7), transparent 70%), #1a1030; }
+.menubar { display: flex; align-items: center; gap: 18px; height: 30px; padding: 0 14px; font-size: 13.5px; font-weight: 500; color: #fff; background: rgba(20,14,34,.45); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+.menubar .der { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.menubar .der span.num { white-space: nowrap; }
+.menubar .der span:first-child { display: grid; place-items: center; width: 26px; height: 22px; border-radius: 5px; background: rgba(255,255,255,.22); }
+.menubar svg { width: 15px; height: 15px; fill: #fff; }
+.menu { position: absolute; right: 78px; top: 34px; width: min(330px, 70%); padding: 5px; border-radius: 11px; background: rgba(38,34,48,.82); -webkit-backdrop-filter: blur(24px) saturate(150%); backdrop-filter: blur(24px) saturate(150%); box-shadow: 0 0 0 .5px rgba(255,255,255,.18), 0 18px 40px -12px rgba(0,0,0,.7); font-size: 13.5px; }
+.menu li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 9px; border-radius: 6px; color: #eceaf2; cursor: default; }
+.menu li:hover, .menu li.sel { background: #4b4ad9; color: #fff; }
+.menu li span:last-child { color: rgba(255,255,255,.55); letter-spacing: .08em; }
+.menu li:hover span:last-child, .menu li.sel span:last-child { color: #fff; }
+.menu hr { border: 0; height: 1px; margin: 5px 9px; background: rgba(255,255,255,.12); }
+.nativa .texto h2 { text-align: left; }
+.nativa .texto p { margin-top: 18px; font-size: 18.5px; color: var(--text-2); max-width: 46ch; }
+.nativa .texto p b { color: var(--text); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.chips li { padding: 7px 13px; border-radius: 999px; font-size: 14.5px; font-weight: 550; color: var(--text); background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px var(--line); }
+
+/* privacidad */
+.tu-mac { position: relative; width: min(1040px, 100%); margin: 0 auto; padding: clamp(24px, 3.6vw, 44px) clamp(20px, 4.5vw, 60px) clamp(32px, 4vw, 48px); border-radius: 28px;
+  background: radial-gradient(55% 80% at 0% 0%, rgba(93,92,246,.30), transparent 70%), radial-gradient(45% 75% at 100% 100%, rgba(236,95,174,.20), transparent 70%), radial-gradient(40% 50% at 55% 0%, rgba(155,77,240,.16), transparent 70%), #110c1f;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 40px 80px -40px rgba(0,0,0,.9); }
+.tu-mac .rotulo { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--text-2); }
+.tu-mac .rotulo .ico { width: 18px; height: 18px; color: #c9a9ff; }
+.flujo { display: grid; grid-template-columns: auto minmax(36px, 1fr) auto minmax(36px, 1fr) auto; align-items: center; margin-top: clamp(24px, 3vw, 32px); }
+.paso { position: relative; display: grid; justify-items: center; }
+/* La nota cuelga bajo su paso para que los avisos del grabador no muevan el flujo. */
+.paso .nota { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); font-size: 14.5px; color: var(--text-2); white-space: nowrap; }
+.paso .nota.aviso { color: var(--text); }
+/* La primera nota se alinea con la primera tecla: centrada se saldría del contorno. */
+.paso:first-child .nota { left: 14px; transform: none; width: max-content; max-width: 230px; white-space: normal; text-wrap: balance; }
+.atajo { display: grid; place-items: center; min-width: 156px; height: 56px; padding: 0 14px; font: inherit; color: inherit; background: transparent; border: 0; border-radius: 999px; cursor: pointer;
+  box-shadow: inset 0 0 0 1px transparent; transition: background .2s, box-shadow .25s var(--ease); }
+.atajo:hover { background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px var(--line-2); }
+.atajo.grabando { outline: none; background: rgba(201,169,255,.08); box-shadow: inset 0 0 0 1.5px #c9a9ff, 0 0 0 6px rgba(201,169,255,.12); }
+.atajo:focus-visible { outline-offset: 4px; border-radius: 999px; }
+.teclas { display: flex; gap: 5px; font-size: 20px; }
+.teclas kbd { vertical-align: 0; }
+.teclas kbd.vacia { min-width: 2.6em; background: transparent; border-style: dashed; }
+.recorte { width: clamp(180px, 18vw, 210px); aspect-ratio: 470 / 178; border-radius: 10px; object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.5), 0 0 0 5px rgba(201,169,255,.16), 0 18px 34px -16px rgba(0,0,0,.9); }
+/* Los hilos son líneas finas; la luz los recorre una vez al entrar en vista. */
+.hilo { position: relative; height: 1px; margin: 0 12px; background: rgba(255,255,255,.22); overflow: visible; }
+.hilo::after { content: ""; position: absolute; right: -1px; top: -3.5px; width: 7px; height: 7px; border: solid rgba(255,255,255,.4); border-width: 1px 1px 0 0; transform: rotate(45deg); }
+.hilo i { position: absolute; inset: -1px 0; overflow: hidden; }
+.hilo i::before { content: ""; position: absolute; inset: 0; width: 45%; background: linear-gradient(90deg, transparent, #c9a9ff 60%, #fff); transform: translateX(-110%); }
+.destinos { position: relative; display: grid; gap: 10px; padding-left: 28px; }
+.destinos::before { content: ""; position: absolute; left: 0; top: 22px; bottom: 22px; width: 1px; background: rgba(255,255,255,.22); }
+.destinos li { position: relative; display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 18px 0 14px; border-radius: 999px; font-size: 15px; color: var(--text-2); white-space: nowrap;
+  background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px var(--line); }
+.destinos li::before { content: ""; position: absolute; left: -28px; top: 50%; width: 28px; height: 1px; background: rgba(255,255,255,.22); }
+.destinos li .ico { width: 18px; height: 18px; color: #c9a9ff; }
+.destinos li b { color: var(--text); font-weight: 600; }
+.salida { display: grid; justify-items: center; text-align: center; margin-top: -4px; }
+.salida .linea { position: relative; width: 0; height: 60px; border-left: 1px dashed rgba(255,255,255,.32); }
+.salida .linea::before { content: ""; position: absolute; left: -4.5px; top: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 0 0 1px rgba(255,255,255,.45); }
+.salida .externo { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; font-size: 14.5px; font-weight: 550; color: var(--text-2); box-shadow: inset 0 0 0 1px var(--line-2); }
+.salida .externo .ico { width: 16px; height: 16px; }
+.salida p { max-width: 520px; margin-top: 16px; font-size: 16px; color: var(--text-2); text-wrap: balance; }
+.salida p b { color: var(--text); font-weight: 600; }
+.tu-mac.vivo .hilo i::before { animation: hilo .55s var(--ease) both; }
+.tu-mac.vivo .hilo:nth-child(4) i::before { animation-delay: .5s; }
+.tu-mac.vivo .recorte { animation: tomar .9s var(--ease) .35s both; }
+.tu-mac.vivo .destinos li { animation: llegar 1.1s var(--ease) both; }
+.tu-mac.vivo .destinos li:nth-child(1) { animation-delay: .95s; }
+.tu-mac.vivo .destinos li:nth-child(2) { animation-delay: 1.05s; }
+.tu-mac.vivo .destinos li:nth-child(3) { animation-delay: 1.15s; }
+@keyframes hilo { to { transform: translateX(240%); } }
+@keyframes tomar { 30% { box-shadow: 0 0 0 1px #fff, 0 0 0 7px rgba(201,169,255,.4), 0 18px 34px -16px rgba(0,0,0,.9); } }
+@keyframes llegar { 25% { background: rgba(201,169,255,.14); box-shadow: inset 0 0 0 1px rgba(201,169,255,.6); } }
+
+/* precio */
+.plan-borde { width: min(520px, 100%); margin: 0 auto; padding: 1px; border-radius: 24px; background: var(--marca); }
+.plan { position: relative; padding: 36px; border-radius: 23px; background: var(--bg-2); text-align: left; }
+.plan .nombre { font-weight: 650; color: var(--text-2); }
+.plan .cifra { display: flex; align-items: baseline; gap: 12px; margin-top: 8px; }
+.plan .cifra b { font-size: 76px; font-weight: 800; letter-spacing: -.05em; line-height: 1; }
+.plan .cifra span { color: var(--text-2); }
+.plan .despues { margin-top: 10px; color: var(--text-2); }
+.plan .despues b { color: var(--text); }
+.plan ul { margin: 26px 0 30px; display: grid; gap: 12px; }
+.plan li { display: flex; gap: 12px; color: var(--text); }
+.plan li .ico { color: #c9a9ff; margin-top: 3px; stroke-width: 2.4; width: 18px; height: 18px; }
+.plan .btn { width: 100%; }
+.plan .meta { margin-top: 14px; text-align: center; font-size: 14px; color: var(--muted); }
+
+/* preguntas */
+.preguntas { width: min(820px, 100%); margin: 0 auto; }
+.preguntas details { border-top: 1px solid var(--line); }
+.preguntas details:last-child { border-bottom: 1px solid var(--line); }
+.preguntas summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; font-size: 19px; font-weight: 650; letter-spacing: -.01em; cursor: pointer; list-style: none; }
+.preguntas summary::-webkit-details-marker { display: none; }
+.preguntas summary .ico { color: var(--muted); transition: transform .3s var(--ease); }
+.preguntas details[open] summary .ico { transform: rotate(45deg); }
+.preguntas details p { padding: 0 0 24px; max-width: 64ch; color: var(--text-2); }
+
+/* cierre */
+.cierre { padding: 160px 0 140px; text-align: center; isolation: isolate; overflow: hidden; }
+.cierre .aurora::before { top: 40px; }
+.cierre .aurora::after { top: 120px; }
+.cierre img { width: 96px; height: 96px; margin: 0 auto 30px; }
+.cierre h2 { max-width: 14ch; margin: 0 auto; }
+.cierre .acciones { margin-top: 36px; }
+
+footer.pie { border-top: 1px solid var(--line); padding: 28px 0 44px; font-size: 14px; color: var(--muted); }
+footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }
+
+@media (max-width: 980px) {
+  .barra nav { display: none; }
+  .barra .btn { margin-left: auto; }
+  .nativa .cuerpo { grid-template-columns: 1fr; gap: 44px; }
+  .detalle { grid-template-columns: 1fr; gap: 18px; }
+  /* El flujo se apila: los hilos pasan a verticales y los destinos se centran. */
+  .flujo { grid-template-columns: 1fr; justify-items: center; }
+  .paso { gap: 10px; }
+  .paso .nota, .paso:first-child .nota { position: static; transform: none; max-width: none; white-space: normal; text-align: center; }
+  .hilo { width: 1px; height: 40px; margin: 14px 0; }
+  .hilo::after { right: -3px; top: auto; bottom: 0; transform: rotate(135deg); }
+  .hilo i::before { width: 100%; height: 45%; background: linear-gradient(180deg, transparent, #c9a9ff 60%, #fff); transform: translateY(-110%); }
+  .destinos { width: 100%; padding-left: 0; margin-bottom: 0; justify-items: center; }
+  .destinos li { max-width: 100%; padding: 0 16px; font-size: 14px; }
+  .destinos li span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .tu-mac .flujo > li:last-child { width: 100%; }
+  .destinos::before, .destinos li::before { display: none; }
+  .salida { margin-top: -4px; }
+  @keyframes hilo { to { transform: translateY(240%); } }
+}
+@media (max-width: 640px) {
+  :root { --wrap: calc(100% - 36px); }
+  body { font-size: 16.5px; }
+  .portada { padding-top: 40px; }
+  .portada .apoyo { font-size: 18px; }
+  .acciones .btn { width: 100%; }
+  .toma { margin-top: 40px; }
+  .marco { border-radius: 14px; }
+  section { padding-top: 104px; }
+  .pestanas { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; width: 100%; }
+  .pestanas button { flex: none; }
+  .carril { grid-template-columns: 96px minmax(0, 1fr) 66px; gap: 12px; }
+  .carril span { font-size: 15px; }
+  .carril output { font-size: 18px; }
+  .tramos { flex-direction: column; }
+  .menu { right: 12px; top: 34px; font-size: 12px; width: 76%; }
+  .menubar > span:nth-child(n+3) { display: none; }
+  .plan { padding: 26px; }
+  .plan .cifra b { font-size: 64px; }
+  .cierre { padding: 120px 0 104px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .toma.destella .flash, .toma.destella .chispa { animation: none; }
+  .tu-mac.vivo .hilo i::before, .tu-mac.vivo .recorte, .tu-mac.vivo .destinos li { animation: none; }
+  .btn, .btn::after { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bajar" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
+  <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-mac" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M8.5 20h7M12 16.5V20"/></symbol>
+  <symbol id="i-candado" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+  <symbol id="i-carpeta" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2.2h7a2 2 0 0 1 2 2v7.8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2Z"/></symbol>
+  <symbol id="i-texto" viewBox="0 0 24 24"><path d="M5 6.5h14M12 6.5v12M8.5 18.5h7"/></symbol>
+  <symbol id="i-portapapeles" viewBox="0 0 24 24"><rect x="5.5" y="5" width="13" height="16" rx="2.2"/><path d="M9 5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v.5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z"/></symbol>
+  <symbol id="i-red" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5s1.1-6.1 3.4-8.5Z"/></symbol>
+  <symbol id="i-flecha-arriba" viewBox="0 0 24 24"><path d="M12 19V6m0 0-5 5m5-5 5 5"/></symbol>
+  <symbol id="i-ojo" viewBox="0 0 24 24"><path d="M2.8 12s3.4-6.2 9.2-6.2 9.2 6.2 9.2 6.2-3.4 6.2-9.2 6.2S2.8 12 2.8 12Z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+  <symbol id="i-destello" viewBox="0 0 24 24"><path d="M10 3.2c.5 4.6 2.2 6.3 6.8 6.8-4.6.5-6.3 2.2-6.8 6.8-.5-4.6-2.2-6.3-6.8-6.8 4.6-.5 6.3-2.2 6.8-6.8Zm8.2 10.6c.25 2 1 2.8 3 3-2 .25-2.75 1-3 3-.25-2-1-2.75-3-3 2-.2 2.75-1 3-3Z"/></symbol>
+</svg>
+
+<header class="barra" id="barra">
+  <div class="wrap">
+    <a class="marca" href="#" aria-label="Destello, inicio"><img src="assets/icon-64.png" alt="">Destello</a>
+    <nav aria-label="Secciones">
+      <a href="#funciones">Funciones</a>
+      <a href="#velocidad">Velocidad</a>
+      <a href="#precio">Precio</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn" href="downloads/Destello.dmg"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar</a>
+  </div>
+</header>
+
+<main>
+  <div class="portada">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="icono"><img src="assets/icon-256.png" alt="" width="84" height="84"></div>
+      <h1>Capturas de pantalla para Mac, más rápidas que un parpadeo.</h1>
+      <p class="apoyo">Destello <b>captura, anota, copia texto y graba</b> tu pantalla con un solo atajo. Del clic al portapapeles en unos <b>10&nbsp;ms</b>.</p>
+      <div class="acciones">
+        <a class="btn" href="downloads/Destello.dmg"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar gratis para Mac</a>
+        <a class="btn sec" href="#funciones"><svg class="ico" aria-hidden="true" style="fill:currentColor;stroke:none"><use href="#i-play"/></svg>Ver cómo funciona</a>
+      </div>
+      <p class="requisitos">Gratis durante la beta · macOS 15 o posterior · Apple Silicon · 2.1&nbsp;MB</p>
+      <figure class="toma" id="toma">
+        <div class="marco">
+          <video id="toma-video" src="media/funciones-marca/recorrido.mp4" poster="media/funciones-marca/recorrido.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Destello capturando un área, anotándola y arrastrándola desde la vista rápida"></video>
+          <span class="flash" aria-hidden="true"></span>
+        </div>
+        <svg class="chispa" aria-hidden="true"><use href="#i-destello"/></svg>
+      </figure>
+    </div>
+  </div>
+
+
+  <section class="escaparate" id="funciones">
+    <div class="wrap">
+      <div class="cabeza">
+        <h2>Un atajo. Todo lo que haces con tu pantalla.</h2>
+        <p>Pulsa <kbd>⌥</kbd> <kbd>⇧</kbd> <kbd>⌘</kbd> <kbd>4</kbd> y elige qué hacer. Cada función tiene también <b>su propio atajo</b>.</p>
+      </div>
+      <div class="pestanas" role="tablist" aria-label="Funciones de Destello"></div>
+      <div class="marco escaparate-marco" id="panel" role="tabpanel">
+        <video id="demo" muted playsinline preload="none"></video>
+      </div>
+      <ul class="detalle" id="detalle" aria-live="polite"></ul>
+    </div>
+  </section>
+
+  <section class="velocidad" id="velocidad">
+    <div class="wrap"><div class="panel">
+      <div class="cabeza">
+        <h2>Más rápida que un parpadeo.</h2>
+        <p>Un parpadeo dura unos 300&nbsp;ms. Del clic al portapapeles, Destello tarda unos <b>10</b>.</p>
+      </div>
+      <div class="carrera" id="carrera">
+        <div class="carril parpadeo"><span>Un parpadeo</span><div class="pista"><i></i></div><output class="num">300 ms</output></div>
+        <div class="carril destello"><span>Destello</span><div class="pista"><i></i></div><output class="num">10 ms</output></div>
+        <footer>
+          <span>La pantalla se congela al abrir el selector y el PNG se comprime con todos los núcleos de tu Mac.</span>
+          <button type="button" id="otra-vez">Otra vez</button>
+        </footer>
+      </div>
+      <ul class="tramos" aria-label="Tiempos medidos en una Mac con M5">
+        <li>Atajo → selector <b class="num">0.7–2 ms</b></li>
+        <li>Clic → vista rápida <b class="num">~6 ms</b></li>
+        <li>Clic → PNG en el portapapeles <b class="num">~10 ms</b></li>
+      </ul>
+    </div></div>
+  </section>
+
+  <section class="nativa">
+    <div class="wrap cuerpo">
+      <div class="escritorio" aria-hidden="true">
+        <div class="menubar">
+          <span style="font-weight:700">Finder</span><span>Archivo</span><span>Edición</span><span>Ver</span>
+          <div class="der">
+            <span><svg><use href="#i-destello"/></svg></span>
+            <span class="num">Jue 9:41</span>
+          </div>
+        </div>
+        <ul class="menu">
+          <li class="sel"><span>Capturar área</span><span>⌥⇧⌘4</span></li>
+          <li><span>Capturar pantalla completa</span><span>⌥⇧⌘3</span></li>
+          <li><span>Capturar ventana</span><span>⌥⇧⌘6</span></li>
+          <li><span>Repetir área anterior</span><span>⌥⇧⌘8</span></li>
+          <li><span>Captura con desplazamiento</span><span>⌥⇧⌘9</span></li>
+          <li><span>Temporizador</span><span></span></li>
+          <hr>
+          <li><span>Copiar texto (OCR)</span><span>⌥⇧⌘7</span></li>
+          <li><span>Grabar pantalla</span><span>⌥⇧⌘5</span></li>
+          <li><span>Grabar GIF</span><span></span></li>
+          <hr>
+          <li><span>Fijar última captura</span><span>⌥⇧⌘P</span></li>
+          <li><span>Anotar última captura</span><span>⌥⇧⌘E</span></li>
+          <li><span>Desbloquear capturas fijadas</span><span></span></li>
+          <li><span>Cerrar capturas fijadas</span><span></span></li>
+          <hr>
+          <li><span>Ocultar íconos del escritorio</span><span></span></li>
+          <li><span>Abrir al iniciar sesión</span><span></span></li>
+          <hr>
+          <li><span>Abrir carpeta de capturas</span><span></span></li>
+          <li><span>Preferencias…</span><span>⌘,</span></li>
+          <li><span>Buscar actualizaciones…</span><span></span></li>
+        </ul>
+      </div>
+      <div class="texto">
+        <h2>Vive en tu barra de menús.</h2>
+        <p>Nativa para macOS y escrita en Rust: <b>2.1&nbsp;MB</b>, sin Electron ni navegador escondido. No ocupa el Dock y ya está lista cuando la llamas.</p>
+        <ul class="chips">
+          <li>AppKit</li><li>ScreenCaptureKit</li><li>Vision</li><li>Apple Silicon</li><li>macOS 15+</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="privada">
+    <div class="wrap">
+      <div class="cabeza">
+        <h2>Tus capturas no salen de tu Mac.</h2>
+        <p>Sin cuenta, sin nube y sin telemetría. Del atajo al archivo, <b>todo pasa en tu Mac</b>.</p>
+      </div>
+      <figure class="tu-mac" id="tu-mac">
+        <figcaption class="rotulo"><svg class="ico" aria-hidden="true"><use href="#i-mac"/></svg>Tu Mac</figcaption>
+        <ol class="flujo">
+          <li class="paso">
+            <button class="atajo" type="button" id="atajo" aria-describedby="atajo-nota"><span class="teclas" id="atajo-teclas"><kbd>⌥</kbd><kbd>⇧</kbd><kbd>⌘</kbd><kbd>4</kbd></span></button>
+            <span class="nota" id="atajo-nota" aria-live="polite">Tu atajo · haz clic para cambiarlo</span>
+          </li>
+          <li class="hilo" aria-hidden="true"><i></i></li>
+          <li class="paso"><img class="recorte" src="media/privada-clabe.jpg" alt="Recorte de una factura con los datos para transferir y una CLABE" width="210" height="80" loading="lazy"><span class="nota">Captura</span></li>
+          <li class="hilo" aria-hidden="true"><i></i></li>
+          <li><ul class="destinos">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-portapapeles"/></svg><b>Portapapeles</b>listo para pegar</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-carpeta"/></svg><span class="num">Destello 2026-10-09 a las 09.41.12.png</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-texto"/></svg><b>Texto</b><span class="num">012180001234567899</span></li>
+          </ul></li>
+        </ol>
+      </figure>
+      <div class="salida">
+        <span class="linea" aria-hidden="true"></span>
+        <span class="externo"><svg class="ico" aria-hidden="true"><use href="#i-red"/></svg>destello.app</span>
+        <p><b>Lo único que sale:</b> una vez al día, Destello pregunta si hay una versión nueva. No envía capturas, texto ni datos de uso.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="precio" id="precio">
+    <div class="wrap">
+      <div class="cabeza">
+        <h2>Gratis durante la beta.</h2>
+        <p>Todas las funciones, sin registro. Cuando salga la 1.0 costará un solo pago.</p>
+      </div>
+      <div class="plan-borde"><div class="plan">
+        <p class="nombre">Beta pública</p>
+        <p class="cifra"><b class="num">$0</b><span>ahora</span></p>
+        <p class="despues">Después, <b>$19 USD pago único</b>. Sin suscripción.</p>
+        <ul>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Todas las funciones, sin límites ni marcas de agua</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Captura, editor, texto, grabación, GIF y página completa</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Actualizaciones automáticas</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Sin cuenta, sin nube, sin telemetría</li>
+        </ul>
+        <a class="btn" href="downloads/Destello.dmg"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar gratis</a>
+        <p class="meta">Versión 0.1.0 · 2.1 MB · macOS 15 o posterior · Apple Silicon</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <div class="wrap">
+      <div class="cabeza">
+        <h2>Preguntas frecuentes.</h2>
+      </div>
+      <div class="preguntas">
+        <details>
+          <summary>¿Qué necesito para usar Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Una Mac con Apple Silicon y macOS 15 Sequoia o posterior. La primera vez, macOS te pide el permiso de Grabación de pantalla; Destello te guía paso a paso.</p>
+        </details>
+        <details>
+          <summary>¿De verdad es gratis?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Sí. Durante la beta pública tienes todas las funciones sin pagar ni registrarte. Al salir la 1.0 costará $19 USD en un solo pago.</p>
+        </details>
+        <details>
+          <summary>¿Mis capturas se suben a algún lado?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>No. No hay cuenta ni nube: tus capturas se guardan como PNG en la carpeta que elijas. La única conexión es para revisar si hay una versión nueva.</p>
+        </details>
+        <details>
+          <summary>macOS dice que no puede verificar la app. ¿Qué hago?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Mientras la beta no esté notarizada, ábrela la primera vez con clic derecho → Abrir. Después abre normal.</p>
+        </details>
+        <details>
+          <summary>¿Puedo usar ⇧⌘4 para capturar con Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Sí. Desactiva los atajos de capturas de macOS en Ajustes del Sistema y asígnalos en las Preferencias de Destello. Todos los atajos se pueden cambiar.</p>
+        </details>
+        <details>
+          <summary>¿Por qué es tan rápida?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Está escrita en Rust sobre AppKit, ScreenCaptureKit y Vision. Las ventanas del selector se preparan al arrancar, la pantalla se congela mientras eliges y el PNG se comprime usando todos los núcleos a la vez.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cierre">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap">
+      <img src="assets/icon-256.png" alt="" width="96" height="96">
+      <h2>Tu próxima captura, antes de que parpadees.</h2>
+      <div class="acciones">
+        <a class="btn" href="downloads/Destello.dmg"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar gratis para Mac</a>
+      </div>
+      <p class="requisitos">Versión 0.1.0 · 2.1 MB · macOS 15 o posterior</p>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <span>Destello · Hecho en México con Rust · © 2026</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const M = 'media/funciones-marca/';
+
+  // Barra con borde al desplazarse.
+  const barra = document.getElementById('barra');
+  addEventListener('scroll', () => barra.classList.toggle('scroll', scrollY > 8), { passive: true });
+
+  // La toma del hero recibe un destello al cargar.
+  const tomaV = document.getElementById('toma-video');
+  if (quieto) { tomaV.removeAttribute('autoplay'); tomaV.removeAttribute('loop'); tomaV.pause(); }
+  else document.getElementById('toma').classList.add('destella');
+
+  // Escaparate: cada pestaña reproduce su video real y, al terminar, pasa a la siguiente.
+  const funciones = [
+    { id: 'capturar', nombre: 'Capturar', video: 'area', puntos: [
+      ['Área, ventana o pantalla', 'Espacio alterna entre área y ventana; Intro captura la pantalla completa.'],
+      ['Lupa 8× y medidas', 'Guías en cruz y el tamaño exacto en píxeles mientras eliges.'],
+      ['Barra de modos', 'Área, Pantalla, Ventana, Desplazamiento, Temporizador, Texto o Grabar, con las teclas 1 a 7.'] ] },
+    { id: 'anotar', nombre: 'Anotar', video: 'anotar', puntos: [
+      ['Flechas y formas', 'Flecha, rectángulo, elipse, línea, texto y lápiz, cada una con su tecla.'],
+      ['Pixela y desenfoca', 'Tapa correos, tarjetas y nombres antes de compartir.'],
+      ['Contadores y foco', 'Numera los pasos y oscurece lo que no importa.'] ] },
+    { id: 'texto', nombre: 'Copiar texto', video: 'texto', puntos: [
+      ['De cualquier imagen', 'Videos, PDFs escaneados o apps que no te dejan copiar.'],
+      ['Se lee en tu Mac', 'Vision reconoce español e inglés, con acentos y ñ.'],
+      ['También códigos QR', 'Y el texto está en tu portapapeles en unos 85 ms.'] ] },
+    { id: 'fijar', nombre: 'Fijar', video: 'fijar', puntos: [
+      ['Siempre encima', 'Deja un diseño o unas medidas flotando sobre tus ventanas.'],
+      ['Rueda y números', 'Tamaño con la rueda o pellizco; opacidad del 10 al 100 % con 1 a 9.'],
+      ['Modo bloqueado', 'Los clics pasan a través de la captura fijada.'] ] },
+    { id: 'pagina', nombre: 'Página completa', video: 'pagina', puntos: [
+      ['Te desplazas tú, o Auto', 'Destello une cada cuadro mientras bajas, o baja solo.'],
+      ['Sin costuras', 'Encabezados y pies fijos salen una sola vez.'],
+      ['Miniatura en vivo', 'Ves la página crecer; cada cuadro se une en ~0.6 ms.'] ] },
+    { id: 'grabar', nombre: 'Grabar y GIF', video: 'gif', puntos: [
+      ['MP4 a 60 fps', 'H.264 o HEVC, con audio del sistema y micrófono.'],
+      ['Clics y teclas', 'Anillos en cada clic y tus atajos en pantalla.'],
+      ['GIF al instante', 'Un codificador propio convierte 8 s de video en ~30 ms.'] ] },
+    { id: 'arrastrar', nombre: 'Arrastrar', video: 'pegar', puntos: [
+      ['Vista rápida', 'Copiar, Guardar, Anotar o Fijar en cuanto sueltas.'],
+      ['Arrastra a cualquier app', 'Suelta la miniatura en Slack, Figma o un reporte, sin buscar el archivo.'],
+      ['Se apilan', 'Varias capturas seguidas esperan su turno en la esquina.'] ] },
+  ];
+  const lista = document.querySelector('.pestanas');
+  const demo = document.getElementById('demo');
+  const detalle = document.getElementById('detalle');
+  const panel = document.getElementById('panel');
+  let actual = -1, visible = false;
+
+  const botones = funciones.map((f, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.role = 'tab'; b.id = 'tab-' + f.id; b.textContent = f.nombre;
+    b.setAttribute('aria-controls', 'panel');
+    b.addEventListener('click', () => elegir(i));
+    b.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (d) { e.preventDefault(); const n = (i + d + funciones.length) % funciones.length; elegir(n); botones[n].focus(); }
+    });
+    lista.append(b);
+    return b;
+  });
+
+  function elegir(i) {
+    if (i === actual) return;
+    actual = i;
+    const f = funciones[i];
+    botones.forEach((b, j) => { b.setAttribute('aria-selected', j === i); b.tabIndex = j === i ? 0 : -1; b.style.setProperty('--p', 0); });
+    panel.setAttribute('aria-labelledby', botones[i].id);
+    demo.poster = M + f.video + '.jpg';
+    demo.src = M + f.video + '.mp4';
+    demo.setAttribute('aria-label', f.nombre + ': video de Destello en una Mac');
+    detalle.innerHTML = f.puntos.map(([t, d]) => `<li><b>${t}</b>${d}</li>`).join('');
+    if (visible && !quieto) demo.play().catch(() => {});
+  }
+  demo.addEventListener('timeupdate', () => {
+    if (demo.duration) botones[actual].style.setProperty('--p', demo.currentTime / demo.duration);
+  });
+  demo.addEventListener('ended', () => elegir((actual + 1) % funciones.length));
+  elegir(0);
+  new IntersectionObserver(([e]) => {
+    visible = e.isIntersecting;
+    if (visible && !quieto) { demo.preload = 'auto'; demo.play().catch(() => {}); } else demo.pause();
+  }, { threshold: .25 }).observe(panel);
+
+  // Carrera: el parpadeo tarda 300 ms reales; Destello, 10.
+  const carrera = document.getElementById('carrera');
+  const barras = carrera.querySelectorAll('.pista i');
+  const correr = () => {
+    barras.forEach(b => { b.style.transition = 'none'; b.style.transform = 'scaleX(0)'; });
+    void carrera.offsetWidth;
+    barras[0].style.transition = 'transform 300ms linear';
+    barras[1].style.transition = 'transform 10ms linear';
+    barras[0].style.transform = 'scaleX(1)';
+    barras[1].style.transform = 'scaleX(.0333)';
+  };
+  document.getElementById('otra-vez').addEventListener('click', correr);
+  if (quieto) { barras[0].style.transform = 'scaleX(1)'; barras[1].style.transform = 'scaleX(.0333)'; }
+  else new IntersectionObserver(([e], o) => { if (e.isIntersecting) { setTimeout(correr, 250); o.disconnect(); } }, { threshold: .6 }).observe(carrera);
+
+  // Privacidad: la captura recorre tu Mac una sola vez.
+  const tuMac = document.getElementById('tu-mac');
+  if (!quieto) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { tuMac.classList.add('vivo'); o.disconnect(); } }, { threshold: .55 }).observe(tuMac);
+  const recorrer = () => { if (quieto) return; tuMac.classList.remove('vivo'); void tuMac.offsetWidth; tuMac.classList.add('vivo'); };
+
+  // El atajo se graba como en Preferencias: mismas reglas y mismos avisos que la app.
+  const boton = document.getElementById('atajo');
+  const teclasEl = document.getElementById('atajo-teclas');
+  const nota = document.getElementById('atajo-nota');
+  const tactil = matchMedia('(hover: none)').matches;
+  const reposo = tactil ? 'Tu atajo · tócalo para cambiarlo' : 'Tu atajo · haz clic para cambiarlo';
+  const NOMBRES = { '⌃': 'Control', '⌥': 'Opción', '⇧': 'Mayúsculas', '⌘': 'Comando' };
+  const ESPECIALES = { Space: 'Espacio', Enter: '↩', Tab: '⇥', Escape: '⎋', Backspace: '⌫', Delete: '⌦',
+    ArrowLeft: '←', ArrowRight: '→', ArrowDown: '↓', ArrowUp: '↑', Home: '↖', End: '↘', PageUp: '⇞', PageDown: '⇟',
+    Minus: '-', Equal: '=', BracketLeft: '[', BracketRight: ']', Quote: "'", Semicolon: ';', Backslash: '\\', Comma: ',', Slash: '/', Period: '.', Backquote: '`' };
+  const CHOQUES = { '⇧⌘3': 'macOS lo usa para sus capturas', '⇧⌘4': 'macOS lo usa para sus capturas', '⇧⌘5': 'macOS lo usa para sus capturas',
+    '⌃⇧⌘3': 'macOS lo usa para sus capturas', '⌃⇧⌘4': 'macOS lo usa para sus capturas', '⌘Espacio': 'macOS lo usa para Spotlight' };
+  // e.code y no e.key: con ⌥, macOS cambia el carácter (⌥4 escribe «¢»).
+  const tecla = code => {
+    const m = /^(?:Key([A-Z])|Digit(\d)|F([1-9]|1\d|20))$/.exec(code);
+    return m ? (m[1] || m[2] || 'F' + m[3]) : ESPECIALES[code];
+  };
+  const modificadores = e => [e.ctrlKey && '⌃', e.altKey && '⌥', e.shiftKey && '⇧', e.metaKey && '⌘'].filter(Boolean);
+  let atajo = ['⌥', '⇧', '⌘', '4'], grabando = false, muestra = 0;
+
+  const pintar = (lista, vacias = 0) => {
+    teclasEl.replaceChildren(...lista.map(k => Object.assign(document.createElement('kbd'), { textContent: k })),
+      ...Array.from({ length: vacias }, () => Object.assign(document.createElement('kbd'), { className: 'vacia' })));
+  };
+  const avisar = (texto, aviso = false) => { nota.textContent = texto; nota.classList.toggle('aviso', aviso); };
+  const rotular = () => boton.setAttribute('aria-label', 'Atajo: ' + atajo.map(k => NOMBRES[k] || k).join(' ') + '. Cambiar');
+  const empezar = () => {
+    grabando = true; boton.classList.add('grabando'); boton.removeAttribute('aria-label');
+    pintar([], 2); avisar('Pulsa tu combinación. Esc cancela.');
+  };
+  const terminar = (nuevo, texto) => {
+    grabando = false; boton.classList.remove('grabando');
+    if (nuevo) atajo = nuevo;
+    pintar(atajo); rotular(); avisar(texto || reposo);
+    if (nuevo) recorrer();
+  };
+
+  boton.addEventListener('click', e => {
+    if (tactil) {
+      const muestras = [['⇧', '⌘', '4'], ['⌃', '⌘', 'A'], ['⌥', 'Espacio'], ['⌃', '⌥', 'S'], ['⌥', '⇧', '⌘', '4']];
+      return terminar(muestras[muestra++ % muestras.length], 'En tu Mac, el que elijas en Preferencias');
+    }
+    if (!grabando) empezar();
+    else if (e.detail) terminar(null);
+  });
+  boton.addEventListener('blur', () => { if (grabando) terminar(null); });
+  boton.addEventListener('keyup', e => { if (grabando) { const m = modificadores(e); pintar(m, m.length ? 1 : 2); } });
+  boton.addEventListener('keydown', e => {
+    if (!grabando) return;
+    e.preventDefault();
+    const m = modificadores(e);
+    if (['Control', 'Alt', 'Shift', 'Meta'].includes(e.key)) return pintar(m, 1);
+    if (!m.length && e.code === 'Escape') return terminar(null);
+    const k = tecla(e.code);
+    if (!k) return avisar('Esa tecla no se puede usar en un atajo.', true);
+    const usable = m.some(x => x !== '⇧') || (m.length === 1 && /^F\d/.test(k));
+    if (!usable) { pintar([], 2); return avisar('Agrega ⌘, ⌥ o ⌃ a la combinación.', true); }
+    const choque = CHOQUES[m.join('') + k];
+    terminar([...m, k], choque ? choque + '; desactívalo en Ajustes' : 'Listo. Así se cambia en Preferencias');
+  });
+  rotular();
+
+})();
+</script>
+</body>
+</html>
