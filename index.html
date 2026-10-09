@@ -71,15 +71,22 @@ kbd { display: inline-grid; place-items: center; min-width: 1.75em; height: 1.75
 .btn.sec:hover { background: rgba(255,255,255,.12); filter: none; }
 
 /* barra */
-.barra { position: sticky; top: 0; z-index: 30; background: rgba(7,6,11,.72); -webkit-backdrop-filter: saturate(160%) blur(16px); backdrop-filter: saturate(160%) blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s; }
-.barra.scroll { border-bottom-color: var(--line); }
+/* Arriba la barra no tiene fondo, para no cortar el resplandor del hero; el vidrio entra al desplazarse. */
+.barra { position: sticky; top: 0; z-index: 30; background: rgba(7,6,11,0); border-bottom: 1px solid transparent; transition: background-color .3s, border-color .3s, -webkit-backdrop-filter .3s, backdrop-filter .3s; }
+.barra.scroll { background: rgba(7,6,11,.72); -webkit-backdrop-filter: saturate(160%) blur(16px); backdrop-filter: saturate(160%) blur(16px); border-bottom-color: var(--line); }
 .barra .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
 .marca { display: flex; align-items: center; gap: 10px; font-weight: 750; font-size: 19px; letter-spacing: -.02em; text-decoration: none; }
 .marca img { width: 30px; height: 30px; }
 .barra nav { display: flex; gap: 26px; margin-left: auto; font-size: 15px; color: var(--text-2); }
 .barra nav a { text-decoration: none; transition: color .2s; }
 .barra nav a:hover { color: var(--text); }
-.barra .btn { height: 38px; padding: 0 16px; font-size: 15px; font-weight: 650; }
+.barra .btn { height: 38px; padding: 0 16px; font-size: 15px; font-weight: 650; isolation: isolate; background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px var(--line-2); transition: transform .25s var(--ease), filter .25s var(--ease), box-shadow .3s; }
+/* El degradado se reserva para cuando el botón del hero ya no está a la vista: una sola acción principal a la vez. */
+.barra .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--marca); opacity: 0; transition: opacity .3s; }
+.barra.cta .btn { box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 10px 24px -14px rgba(0,0,0,.9); }
+.barra.cta .btn::before { opacity: 1; }
+.barra:not(.cta) .btn::after { display: none; }
+.barra:not(.cta) .btn:hover { background: rgba(255,255,255,.12); filter: none; }
 .barra .btn .ico { width: 17px; height: 17px; }
 
 /* resplandores de marca */
@@ -89,11 +96,11 @@ kbd { display: inline-grid; place-items: center; min-width: 1.75em; height: 1.75
 .aurora::after { width: 900px; height: 700px; left: 50%; top: -180px; margin-left: -150px; background: radial-gradient(closest-side, rgba(236,95,174,.30), transparent); }
 
 /* portada */
-.portada { position: relative; isolation: isolate; text-align: center; padding: 48px 0 0; }
-.portada .icono { position: relative; width: 84px; height: 84px; margin: 0 auto 26px; }
-.portada .icono::before { content: ""; position: absolute; inset: -70px; z-index: -1; background: radial-gradient(closest-side, rgba(155,77,240,.55), transparent); }
-.portada .icono img { width: 84px; height: 84px; }
-h1 { font-size: clamp(44px, 5.6vw, 82px); font-weight: 900; line-height: 1; letter-spacing: -.04em; max-width: 24ch; margin: 0 auto; text-wrap: balance; }
+/* La portada sube por debajo de la barra (64 px) para que el resplandor llegue al borde de la página. */
+.portada { position: relative; isolation: isolate; text-align: center; margin-top: -64px; padding: 136px 0 0; }
+.portada .aurora::before { background: radial-gradient(closest-side, rgba(93,92,246,.34), transparent); }
+.portada .aurora::after { background: radial-gradient(closest-side, rgba(236,95,174,.22), transparent); }
+h1 { font-size: clamp(44px, 4.9vw, 70px); font-weight: 900; line-height: 1; letter-spacing: -.04em; max-width: 32ch; margin: 0 auto; text-wrap: balance; }
 .portada .apoyo { max-width: 620px; margin: 24px auto 0; font-size: 20px; line-height: 1.5; color: var(--text-2); text-wrap: balance; }
 .portada .apoyo b { color: var(--text); font-weight: 600; }
 .acciones { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
@@ -286,7 +293,7 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
 @media (max-width: 640px) {
   :root { --wrap: calc(100% - 36px); }
   body { font-size: 16.5px; }
-  .portada { padding-top: 40px; }
+  .portada { padding-top: 104px; }
   .portada .apoyo { font-size: 18px; }
   .acciones .btn { width: 100%; }
   .toma { margin-top: 40px; }
@@ -308,7 +315,7 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
   html { scroll-behavior: auto; }
   .toma.destella .flash, .toma.destella .chispa { animation: none; }
   .tu-mac.vivo .hilo i::before, .tu-mac.vivo .recorte, .tu-mac.vivo .destinos li { animation: none; }
-  .btn, .btn::after { transition: none; }
+  .btn, .btn::before, .btn::after, .barra { transition: none; }
 }
 </style>
 </head>
@@ -347,7 +354,6 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
   <div class="portada">
     <div class="aurora" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="icono"><img src="assets/icon-256.png" alt="" width="84" height="84"></div>
       <h1>Capturas de pantalla para Mac, más rápidas que un parpadeo.</h1>
       <p class="apoyo">Destello <b>captura, anota, copia texto y graba</b> tu pantalla con un solo atajo. Del clic al portapapeles en unos <b>10&nbsp;ms</b>.</p>
       <div class="acciones">
@@ -558,9 +564,13 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
   const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const M = 'media/funciones-marca/';
 
-  // Barra con borde al desplazarse.
+  // La barra gana su vidrio al desplazarse, y su botón el degradado cuando el del hero sale de la vista.
   const barra = document.getElementById('barra');
-  addEventListener('scroll', () => barra.classList.toggle('scroll', scrollY > 8), { passive: true });
+  const alDesplazar = () => barra.classList.toggle('scroll', scrollY > 8);
+  addEventListener('scroll', alDesplazar, { passive: true });
+  alDesplazar();
+  new IntersectionObserver(([e]) => barra.classList.toggle('cta', !e.isIntersecting), { rootMargin: '-64px 0px 0px' })
+    .observe(document.querySelector('.portada .acciones .btn'));
 
   // La toma del hero recibe un destello al cargar.
   const tomaV = document.getElementById('toma-video');
