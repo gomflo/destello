@@ -639,9 +639,13 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
     detalle.innerHTML = f.puntos.map(([t, d]) => `<li><b>${t}</b>${d}</li>`).join('');
     if (visible && !quieto) demo.play().catch(() => {});
   }
-  demo.addEventListener('timeupdate', () => {
+  // `timeupdate` solo llega unas 4 veces por segundo y la barra avanzaría a saltos; se pinta en cada cuadro mientras el video corre.
+  let cuadro = 0;
+  const avance = () => {
     if (demo.duration) botones[actual].style.setProperty('--p', demo.currentTime / demo.duration);
-  });
+    cuadro = demo.paused || demo.ended ? 0 : requestAnimationFrame(avance);
+  };
+  demo.addEventListener('playing', () => { if (!cuadro) cuadro = requestAnimationFrame(avance); });
   demo.addEventListener('ended', () => elegir((actual + 1) % funciones.length));
   elegir(0);
   new IntersectionObserver(([e]) => {
