@@ -318,7 +318,7 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
   .btn, .btn::before, .btn::after, .barra { transition: none; }
 }
 </style>
-<script defer src="https://stats.gomflo.dev/script.js" data-website-id="ca785f30-74e2-4b25-8a32-9621a6aa1bf7" data-domains="gomflo.dev"></script>
+<script defer src="https://stats.gomflo.dev/script.js" data-website-id="ca785f30-74e2-4b25-8a32-9621a6aa1bf7" data-domains="gomflo.dev" data-performance="true"></script>
 </head>
 <body>
 
@@ -514,27 +514,27 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
       </div>
       <div class="preguntas">
         <details>
-          <summary>¿Qué necesito para usar Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <summary data-umami-event="Pregunta" data-umami-event-tema="requisitos">¿Qué necesito para usar Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
           <p>Una Mac con Apple Silicon y macOS 15 Sequoia o posterior. La primera vez, macOS te pide el permiso de Grabación de pantalla; Destello te guía paso a paso.</p>
         </details>
         <details>
-          <summary>¿De verdad es gratis?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <summary data-umami-event="Pregunta" data-umami-event-tema="gratis">¿De verdad es gratis?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
           <p>Sí. Durante la beta pública tienes todas las funciones sin pagar ni registrarte. Al salir la 1.0 costará $19 USD en un solo pago.</p>
         </details>
         <details>
-          <summary>¿Mis capturas se suben a algún lado?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <summary data-umami-event="Pregunta" data-umami-event-tema="privacidad">¿Mis capturas se suben a algún lado?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
           <p>No. No hay cuenta ni nube: tus capturas se guardan como PNG en la carpeta que elijas. La única conexión es para revisar si hay una versión nueva.</p>
         </details>
         <details>
-          <summary>macOS dice que no puede verificar la app. ¿Qué hago?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <summary data-umami-event="Pregunta" data-umami-event-tema="gatekeeper">macOS dice que no puede verificar la app. ¿Qué hago?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
           <p>Mientras la beta no esté notarizada, ábrela la primera vez con clic derecho → Abrir. Después abre normal.</p>
         </details>
         <details>
-          <summary>¿Puedo usar ⇧⌘4 para capturar con Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <summary data-umami-event="Pregunta" data-umami-event-tema="atajo">¿Puedo usar ⇧⌘4 para capturar con Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
           <p>Sí. Desactiva los atajos de capturas de macOS en Ajustes del Sistema y asígnalos en las Preferencias de Destello. Todos los atajos se pueden cambiar.</p>
         </details>
         <details>
-          <summary>¿Por qué es tan rápida?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <summary data-umami-event="Pregunta" data-umami-event-tema="rapidez">¿Por qué es tan rápida?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
           <p>Está escrita en Rust sobre AppKit, ScreenCaptureKit y Vision. Las ventanas del selector se preparan al arrancar, la pantalla se congela mientras eliges y el PNG se comprime usando todos los núcleos a la vez.</p>
         </details>
       </div>
