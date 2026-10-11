@@ -1,9 +1,9 @@
 {
-  "version": "0.1.0",
-  "url": "downloads/Destello-0.1.0.dmg",
-  "size": 2206870,
-  "sha256": "ec44311146af313487c23832d3cfaec11f38f8c6c3835ed50e15c8a11b652ffb",
+  "version": "0.1.1",
+  "url": "downloads/Destello-0.1.1.dmg",
+  "size": 1379166,
+  "sha256": "2d2fd4b2c3760dd4b93a86bfb016f9600f6707ed1274654f8016d7acd8e70b35",
   "minimum_os": "15.0",
-  "published": "2026-10-08",
-  "notes": "Primera beta pública: capturas, editor, OCR, grabación, GIF y captura con desplazamiento."
+  "published": "2026-10-10",
+  "notes": "Destello de confirmación: al capturar, grabar o copiar texto, el área se despega y vuela a la vista rápida."
 }
