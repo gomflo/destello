@@ -1,9 +1,9 @@
 {
-  "version": "0.1.1",
-  "url": "downloads/Destello-0.1.1.dmg",
-  "size": 1379166,
-  "sha256": "2d2fd4b2c3760dd4b93a86bfb016f9600f6707ed1274654f8016d7acd8e70b35",
+  "version": "0.1.2",
+  "url": "downloads/Destello-0.1.2.dmg",
+  "size": 1379383,
+  "sha256": "40a7c9deb531608c8280f5e9f8cfde470c2d0d6b0f7c42a080e9a41d6bdeccd2",
   "minimum_os": "15.0",
   "published": "2026-10-10",
-  "notes": "Destello de confirmación: al capturar, grabar o copiar texto, el área se despega y vuela a la vista rápida."
+  "notes": "Las actualizaciones automáticas ya funcionan: el aviso de versiones nuevas apuntaba a una dirección equivocada."
 }
