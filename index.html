@@ -5,317 +5,402 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Destello · Capturas de pantalla para Mac, más rápidas que un parpadeo</title>
 <meta name="description" content="Destello es una app de capturas de pantalla para Mac. Captura, anota, copia texto, fija y graba con un atajo. Nativa, 2.1 MB, gratis durante la beta.">
-<meta name="theme-color" content="#07060b">
+<meta name="theme-color" content="#e9e9f0">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Destello · Capturas de pantalla para Mac">
 <meta property="og:description" content="Captura, anota, copia texto, fija y graba con un atajo. Nativa, 2.1 MB, gratis durante la beta.">
 <meta property="og:url" content="https://gomflo.dev/destello/">
 <meta property="og:image" content="https://gomflo.dev/destello/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/icon-64.png">
-<link rel="preload" href="fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="media/destello-hero.jpg" as="image">
-<style>
-/* Landing de Destello: la identidad del ícono y el promo de la app. */
-@font-face {
-  font-family: "Geist";
-  src: url(fonts/geist-latin.woff2) format("woff2");
-  font-weight: 100 900;
-  font-display: swap;
-}
-:root {
-  --bg: #07060b;
-  --bg-2: #0f0d17;
-  --bg-3: #17141f;
-  --line: rgba(255, 255, 255, .09);
-  --line-2: rgba(255, 255, 255, .16);
-  --text: #f4f3f8;
-  --text-2: #aaa6b9;
-  --muted: #827e93;
-  --indigo: #5d5cf6;
-  --violet: #9b4df0;
-  --pink: #ec5fae;
-  --marca: linear-gradient(100deg, var(--indigo), var(--violet) 55%, var(--pink));
-  --font: "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --ease: cubic-bezier(.16, 1, .3, 1);
-  --wrap: min(1200px, 100% - 64px);
-}
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/icon-64.png">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<style id="estilos">
+/* Landing de Destello. El rectángulo del selector es la identidad: la página es la pantalla atenuada y lo elegido queda en blanco. */
+@font-face { font-family: "Archivo"; src: url(fonts/archivo.woff2) format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
+:root { --velo: #e9e9f0; --papel: #fff; --tinta: #0e0d14; --tinta-2: #55536a; --linea: rgba(14,13,20,.16); --azul: #4a45e8; --rojo: #ff3b30; --amarillo: #ffd60a;
+  --font: "Archivo", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; --ui: -apple-system, BlinkMacSystemFont, system-ui, sans-serif; --ease: cubic-bezier(.16, 1, .3, 1); }
 * { box-sizing: border-box; }
-html { background: var(--bg); color: var(--text); scroll-behavior: smooth; scroll-padding-top: 72px; color-scheme: dark; scrollbar-color: #3a3546 var(--bg); }
-body { margin: 0; font: 400 17px/1.6 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; caret-color: var(--violet); }
-::selection { background: var(--violet); color: #fff; }
-h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+html { background: var(--velo); scroll-behavior: smooth; scroll-padding-top: 96px; scrollbar-color: #b6b5c6 var(--velo); }
+body { margin: 0; overflow-x: hidden; }
+/* Todo lo que se captura vive en .pagina, que lleva su propio fondo y tipografía para que sus clones se vean igual. */
+.pagina { position: relative; background: var(--velo); color: var(--tinta); font: 400 18px/1.55 var(--font); -webkit-font-smoothing: antialiased; caret-color: var(--azul); }
+::selection { background: var(--azul); color: #fff; }
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
 a { color: inherit; text-underline-offset: .2em; }
-:focus-visible { outline: 2px solid #c9a9ff; outline-offset: 3px; border-radius: 8px; }
-img, video, svg { display: block; max-width: 100%; }
-.wrap { width: var(--wrap); margin-inline: auto; }
-.ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+:focus-visible { outline: 2px solid var(--azul); outline-offset: 3px; border-radius: 4px; }
+img, svg { display: block; max-width: 100%; }
+[hidden] { display: none !important; }
+.wrap { width: min(1240px, 100% - 64px); margin-inline: auto; }
 .num { font-variant-numeric: tabular-nums; }
-kbd { display: inline-grid; place-items: center; min-width: 1.75em; height: 1.75em; padding: 0 .38em; font: 600 .78em/1 var(--font); color: var(--text); background: rgba(255,255,255,.08); border: 1px solid var(--line-2); border-radius: 6px; vertical-align: .08em; }
+kbd { display: inline-grid; place-items: center; min-width: 1.7em; height: 1.7em; padding: 0 .36em; font: 650 .78em/1 var(--font); color: var(--tinta); background: var(--papel); border: 1.5px solid var(--tinta); border-radius: 6px; vertical-align: .08em; }
+.ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Marcas de corte: el marco del sitio. Una cruz de registro en cada borde de la columna, a media altura del espacio entre dos secciones. */
+section > .wrap { position: relative; }
+section > .wrap::before, section > .wrap::after { content: ""; position: absolute; top: calc(var(--sec) * -.5 - 8px); width: 17px; height: 17px; pointer-events: none;
+  background: linear-gradient(var(--tinta), var(--tinta)) 50% 0 / 1.5px 100% no-repeat, linear-gradient(var(--tinta), var(--tinta)) 0 50% / 100% 1.5px no-repeat; }
+section > .wrap::before { left: -8px; } section > .wrap::after { right: -8px; }
 
 /* botones */
-.btn {
-  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 26px;
-  font: 700 19px/1 var(--font); letter-spacing: -.01em; color: #fff; text-decoration: none; white-space: nowrap; cursor: pointer;
-  background: var(--marca); border: 0; border-radius: 999px; overflow: hidden;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 10px 24px -14px rgba(0,0,0,.9);
-  transition: transform .25s var(--ease), filter .25s var(--ease);
-}
-.btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%); transform: translateX(-120%); transition: transform .7s var(--ease); }
-.btn:hover { transform: translateY(-1px); filter: brightness(1.07); }
-.btn:hover::after { transform: translateX(120%); }
-.btn .ico { width: 21px; height: 21px; stroke-width: 2.4; }
-.btn.sec { background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px var(--line-2); font-weight: 600; }
-.btn.sec::after { display: none; }
-.btn.sec:hover { background: rgba(255,255,255,.12); filter: none; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 58px; padding: 0 28px; border: 0; border-radius: 999px; background: var(--azul); color: #fff; font: 750 19px/1 var(--font); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; cursor: pointer; transition: transform .25s var(--ease), background-color .2s; }
+.btn:hover { transform: translateY(-2px); background: #3b36d6; }
+.btn.linea { height: 40px; padding: 0 18px; background: none; color: var(--tinta); font-size: 15px; font-weight: 700; box-shadow: inset 0 0 0 1.5px var(--tinta); }
+.btn.linea:hover { background: var(--tinta); color: #fff; transform: none; }
 
-/* barra */
-/* Arriba la barra no tiene fondo, para no cortar el resplandor del hero; el vidrio entra al desplazarse. */
-.barra { position: sticky; top: 0; z-index: 30; background: rgba(7,6,11,0); border-bottom: 1px solid transparent; transition: background-color .3s, border-color .3s, -webkit-backdrop-filter .3s, backdrop-filter .3s; }
-.barra.scroll { background: rgba(7,6,11,.72); -webkit-backdrop-filter: saturate(160%) blur(16px); backdrop-filter: saturate(160%) blur(16px); border-bottom-color: var(--line); }
-.barra .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
-.marca { display: flex; align-items: center; gap: 10px; font-weight: 750; font-size: 19px; letter-spacing: -.02em; text-decoration: none; }
-.marca img { width: 30px; height: 30px; }
-.barra nav { display: flex; gap: 26px; margin-left: auto; font-size: 15px; color: var(--text-2); }
-.barra nav a { text-decoration: none; transition: color .2s; }
-.barra nav a:hover { color: var(--text); }
-.barra .btn { height: 38px; padding: 0 16px; font-size: 15px; font-weight: 650; isolation: isolate; background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px var(--line-2); transition: transform .25s var(--ease), filter .25s var(--ease), box-shadow .3s; }
-/* El degradado se reserva para cuando el botón del hero ya no está a la vista: una sola acción principal a la vez. */
-.barra .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--marca); opacity: 0; transition: opacity .3s; }
-.barra.cta .btn { box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 10px 24px -14px rgba(0,0,0,.9); }
-.barra.cta .btn::before { opacity: 1; }
-.barra:not(.cta) .btn::after { display: none; }
-.barra:not(.cta) .btn:hover { background: rgba(255,255,255,.12); filter: none; }
-.barra .btn .ico { width: 17px; height: 17px; }
+/* marco: lo seleccionado. Blanco, borde de tinta y dos asas en esquinas opuestas. */
+.marco { position: relative; background: var(--papel); box-shadow: 0 0 0 1.5px var(--tinta); }
+.marco::before, .marco::after { content: ""; position: absolute; z-index: 1; width: 9px; height: 9px; background: var(--papel); box-shadow: 0 0 0 1.5px var(--tinta); }
+.marco::before { left: -5px; top: -5px; } .marco::after { right: -5px; bottom: -5px; }
 
-/* resplandores de marca */
-.aurora { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.aurora::before, .aurora::after { content: ""; position: absolute; border-radius: 50%; }
-.aurora::before { width: 900px; height: 700px; left: 50%; top: -260px; margin-left: -700px; background: radial-gradient(closest-side, rgba(93,92,246,.42), transparent); }
-.aurora::after { width: 900px; height: 700px; left: 50%; top: -180px; margin-left: -150px; background: radial-gradient(closest-side, rgba(236,95,174,.30), transparent); }
+/* encabezado: fijo arriba, en tres zonas sobre las verticales de la retícula (logo, secciones, descarga) */
+.barra { position: sticky; top: 0; z-index: 10; background: rgba(233,233,240,.88); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1.5px solid transparent; transition: border-color .25s; }
+.barra.scroll { border-bottom-color: var(--tinta); }
+.nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 72px; }
+/* El logo: un bloque de tinta con el destello en blanco y dos asas, con el peso de los titulares */
+.marca { justify-self: start; display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 900; font-stretch: 108%; letter-spacing: -.035em; text-decoration: none; }
+.logo { width: 32px; height: 32px; }
+.nav nav { display: flex; gap: 30px; font-size: 15.5px; font-weight: 550; color: var(--tinta-2); }
+.nav nav a { text-decoration: none; transition: color .2s; }
+.nav nav a:hover { color: var(--tinta); }
+.nav .btn { justify-self: end; height: 40px; padding: 0 18px; background: var(--tinta); font-size: 15px; }
+.nav .btn:hover { background: var(--azul); transform: none; }
 
 /* portada */
-/* La portada sube por debajo de la barra (64 px) para que el resplandor llegue al borde de la página. */
-.portada { position: relative; isolation: isolate; text-align: center; margin-top: -64px; padding: 136px 0 0; }
-.portada .aurora::before { background: radial-gradient(closest-side, rgba(93,92,246,.34), transparent); }
-.portada .aurora::after { background: radial-gradient(closest-side, rgba(236,95,174,.22), transparent); }
-h1 { font-size: clamp(44px, 4.9vw, 70px); font-weight: 900; line-height: 1; letter-spacing: -.04em; max-width: 32ch; margin: 0 auto; text-wrap: balance; }
-.portada .apoyo { max-width: 620px; margin: 24px auto 0; font-size: 20px; line-height: 1.5; color: var(--text-2); text-wrap: balance; }
-.portada .apoyo b { color: var(--text); font-weight: 600; }
-.acciones { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
-.requisitos { margin-top: 16px; font-size: 14.5px; color: var(--muted); }
-
-/* marcos de video */
-.marco { position: relative; border-radius: 22px; overflow: hidden; background: #0b0814; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 40px 80px -40px rgba(0,0,0,.9); }
-.marco::before { content: ""; position: absolute; z-index: 1; left: 12%; right: 12%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); }
-.marco video { width: 100%; height: auto; }
-.toma { position: relative; margin: 48px auto 0; width: min(1120px, 100%); }
-.toma .marco video { aspect-ratio: 1440 / 990; }
-.toma .flash { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.7) 50%, transparent 62%); transform: translateX(-110%); }
-.toma .chispa { position: absolute; right: 2.5%; top: 1.5%; width: 46px; height: 46px; fill: #fff; opacity: 0; pointer-events: none; }
-.toma.destella .flash { animation: barrido 1s var(--ease) .4s 1 both; }
-.toma.destella .chispa { animation: chispa .9s var(--ease) .75s 1 both; }
-@keyframes barrido { to { transform: translateX(110%); } }
-@keyframes chispa { 0% { opacity: 0; transform: scale(.2) rotate(-45deg); } 35% { opacity: 1; transform: scale(1.15) rotate(0); } 100% { opacity: 0; transform: scale(.6) rotate(20deg); } }
+.hero { position: relative; margin-top: -72px; padding: calc(72px + clamp(20px, 5vh, 56px)) 0 clamp(56px, 9vh, 96px); min-height: min(84svh, 760px); }
+.hero-sel { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.hero-sel .hoyo { fill: var(--papel); }
+.hero-sel .borde { fill: none; stroke: var(--tinta); stroke-width: 1.5; }
+.hero-sel .corte { fill: none; stroke: var(--tinta); stroke-width: 1.5; }
+.hero-sel .asa { fill: var(--papel); stroke: var(--tinta); stroke-width: 1.5; }
+.palabra { position: relative; display: inline-block; white-space: nowrap; padding: .04em .03em .1em; font-size: clamp(72px, 16.4vw, 248px); font-weight: 900; font-stretch: 112%; line-height: .86; letter-spacing: -.045em; -webkit-user-select: none; user-select: none; }
+.medida { position: absolute; z-index: 1; left: 0; top: 0; height: 26px; padding: 0 10px; border-radius: 6px; background: var(--tinta); color: #fff; font: 600 13px/26px var(--font); white-space: nowrap; pointer-events: none; }
+/* Portada centrada: la palabra seleccionada, el titular, el apoyo, la acción y la invitación en una sola columna */
+.centro { display: grid; justify-items: center; text-align: center; margin-top: clamp(40px, 7vh, 72px); }
+.sel-ancho { width: 56%; }
+.centro h1 { max-width: 20ch; margin-top: 64px; }
+.centro .apoyo { margin-top: 22px; }
+.centro .cta { flex-direction: column; margin-top: 30px; gap: 14px; }
+.centro .pista { margin-top: 30px; }
+/* La selección se dibuja al cargar: la palabra empieza apagada y se enciende hasta donde llega el cursor (--p). */
+.palabra.trazando { color: transparent; background: linear-gradient(90deg, var(--tinta) calc(var(--p, 0) * 100%), rgba(14,13,20,.26) calc(var(--p, 0) * 100%)); -webkit-background-clip: text; background-clip: text; }
+.palabra { cursor: pointer; }
+.palabra::after { content: ""; position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.palabra.destello::after { animation: destello .42s var(--ease) both; }
+@keyframes destello { from { opacity: .92; } to { opacity: 0; } }
+.h-cursor { position: absolute; z-index: 2; left: -12px; top: -12px; width: 24px; height: 24px; fill: none; stroke: var(--tinta); stroke-width: 1.5; pointer-events: none; }
+.h-chispa { position: absolute; z-index: 2; left: -30px; top: -30px; width: 60px; height: 60px; fill: var(--tinta); opacity: 0; pointer-events: none; }
+.h-chispa.salta { animation: chispa .7s var(--ease) both; }
+@keyframes chispa { 0% { opacity: 0; scale: .2; rotate: -40deg; } 30% { opacity: 1; scale: 1.15; rotate: 0deg; } 100% { opacity: 0; scale: .5; rotate: 25deg; } }
+.hero-sel .asa, .hero-sel .corte { transition: opacity .3s; }
+.hero-sel.trazando .asa, .hero-sel.trazando .corte { opacity: 0; transition: none; }
+h1 { font-size: clamp(32px, 4vw, 56px); font-weight: 800; line-height: 1.03; letter-spacing: -.035em; text-wrap: balance; }
+.apoyo { max-width: 46ch; font-size: 20px; line-height: 1.5; color: var(--tinta-2); }
+.apoyo b, .cuerpo b { color: var(--tinta); font-weight: 650; }
+.cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.cierre .cta { margin-top: 40px; }
+.req { font-size: 14.5px; color: var(--tinta-2); }
+.pista { font-size: 15.5px; line-height: 1.7; color: var(--tinta-2); }
+.pista kbd { margin-right: 3px; }
+.pista button { margin: 0; padding: 0; cursor: pointer; border: 0; background: none; font: inherit; font-weight: 650; color: var(--tinta); text-decoration: underline; text-underline-offset: .2em; }
 
 /* secciones */
-section { position: relative; padding: 140px 0 0; }
-.cabeza { text-align: center; max-width: 760px; margin: 0 auto 48px; }
-h2 { font-size: clamp(36px, 4.8vw, 64px); font-weight: 800; line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
-.cabeza p { margin: 18px auto 0; max-width: 600px; font-size: 19px; line-height: 1.55; color: var(--text-2); text-wrap: balance; }
-.cabeza p b { color: var(--text); font-weight: 600; }
+/* --sec es el aire entre dos secciones; la cruz de registro va a media altura de ese espacio. */
+.pagina { --sec: clamp(136px, 15vw, 232px); }
+section { position: relative; padding: var(--sec) 0 0; }
+h2 { font-size: clamp(38px, 5.6vw, 84px); font-weight: 900; font-stretch: 108%; line-height: .96; letter-spacing: -.045em; text-wrap: balance; }
+h3 { font-size: clamp(28px, 3.2vw, 46px); font-weight: 900; font-stretch: 106%; line-height: 1; letter-spacing: -.04em; }
+.entrada { max-width: 44ch; margin-top: 28px; font-size: 20px; color: var(--tinta-2); }
+.cuerpo { color: var(--tinta-2); max-width: 46ch; }
 
-/* escaparate de funciones */
-.pestanas { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin: 0 auto 28px; padding: 6px; width: fit-content; max-width: 100%; border-radius: 999px; background: rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px var(--line); }
-.pestanas button { position: relative; overflow: hidden; height: 40px; padding: 0 16px; font: 600 15px/1 var(--font); color: var(--text-2); background: transparent; border: 0; border-radius: 999px; cursor: pointer; transition: color .2s, background .2s; }
-.pestanas button:hover { color: var(--text); }
-.pestanas button[aria-selected="true"] { color: var(--text); background: rgba(255,255,255,.1); }
-.pestanas button[aria-selected="true"]::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px; height: 3px; border-radius: 2px; background: var(--marca); transform-origin: left; transform: scaleX(var(--p, 0)); }
-.escaparate-marco { width: min(1060px, 100%); margin: 0 auto; }
-.escaparate .marco video { aspect-ratio: 1440 / 990; }
-.detalle { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 40px; width: min(1000px, 100%); margin: 36px auto 0; }
-.detalle li { font-size: 16px; line-height: 1.55; color: var(--text-2); }
-.detalle b { display: block; margin-bottom: 4px; color: var(--text); font-weight: 650; font-size: 17px; }
+/* funciones: los siete nombres a la izquierda y un panel a la derecha. La selección abraza el nombre activo y se desliza al que se señala. */
+.fn-lista { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-content: start; margin-top: clamp(56px, 7vw, 96px); }
+.fn-item { display: contents; }
+.fn-item h3 { grid-column: 1; }
+.fn-nombre { position: relative; z-index: 1; display: block; padding: .16em .3em .2em; border: 0; background: none; font: inherit; letter-spacing: inherit; color: rgba(14,13,20,.34); text-align: left; cursor: pointer; transition: color .25s; }
+.fn-nombre:hover, .fn-item.activa .fn-nombre { color: var(--tinta); }
+.fn-sel { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; transition: transform .38s var(--ease), width .38s var(--ease), height .38s var(--ease); }
+.det { grid-column: 2; grid-row: 1 / span 7; align-self: start; padding: 22px 22px 30px; visibility: hidden; opacity: 0; }
+.fn-item.activa .det { visibility: visible; opacity: 1; transition: opacity .3s; }
+.det .cuerpo { max-width: none; margin: 24px 6px 0; }
+/* La demostración: un pedazo de pantalla (velo) de 300 × 160 con piezas simples. El estado base es el final; las animaciones parten del inicio. */
+.demo { display: grid; place-items: center; height: 200px; overflow: hidden; background: var(--velo); }
+.esc { position: relative; width: 300px; height: 160px; }
+.esc > *, .esc span > i { position: absolute; }
+.esc .b { height: 12px; background: #c6c6d1; }
+.d-hoja { inset: 12px 30px; background: var(--papel); box-shadow: 0 0 0 1px var(--linea); }
+.d-etq { right: 40px; top: 141px; height: 18px; padding: 0 6px; border-radius: 4px; background: var(--tinta); color: #fff; font: 600 10.500px/18px var(--font); }
+.d-sel { left: 40px; top: 22px; width: 220px; height: 110px; background: var(--papel); box-shadow: 0 0 0 1.500px var(--tinta); }
+.d-rect { left: 46px; top: 29px; width: 136px; height: 30px; border: 2.500px solid var(--rojo); border-radius: 3px; }
+.d-res { left: 50px; top: 67px; width: 178px; height: 22px; background: var(--amarillo); mix-blend-mode: multiply; transform-origin: left; }
+.d-num { left: 224px; top: 97px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #dc2a20; color: #fff; font: 800 15px/1 var(--font); font-style: normal; }
+.d-barrido { left: 46px; top: 29px; width: 200px; height: 78px; border: 1.500px dashed var(--tinta); }
+.d-txt { left: 14px; top: 104px; width: 124px; height: 48px; border-radius: 8px; background: #1f1f24; box-shadow: 0 10px 18px -8px rgba(14,13,20,.5); }
+.d-txt i { left: 12px; height: 6px; border-radius: 3px; background: rgba(255,255,255,.75); } .d-txt i:first-child { top: 14px; width: 84px; } .d-txt i:last-child { top: 28px; width: 56px; }
+.d-win { border: 1.500px solid var(--tinta); background: var(--velo); } .d-win.w1 { left: 18px; top: 16px; width: 170px; height: 108px; } .d-win.w2 { left: 112px; top: 44px; width: 170px; height: 102px; background: #dcdce6; }
+.d-pin { left: 96px; top: 28px; width: 112px; height: 76px; background: var(--papel); box-shadow: 0 0 0 1px rgba(14,13,20,.3), 0 16px 26px -8px rgba(14,13,20,.5); }
+.d-pin i { left: 12px; height: 10px; background: #c6c6d1; } .d-pin i:first-child { top: 16px; width: 70px; } .d-pin i:last-child { top: 36px; width: 46px; }
+.d-reg { left: 46px; top: 14px; width: 150px; height: 132px; overflow: hidden; background: var(--papel); outline: 1.500px dashed var(--tinta); outline-offset: 2px; }
+.d-tira { left: 0; top: 0; width: 100%; height: 360px; transform: translateY(-228px); background: repeating-linear-gradient(var(--papel) 0 22px, #d5d5df 22px 34px, var(--papel) 34px 56px, #c2c2ce 56px 104px, var(--papel) 104px 120px); }
+.d-mini { left: 214px; top: 14px; width: 40px; height: 132px; border-radius: 6px; background: #1c1c1f; }
+.d-mini i { left: 5px; top: 5px; width: 30px; height: 122px; background: var(--papel); transform-origin: top; }
+.d-zona { left: 50px; top: 14px; width: 200px; height: 98px; background: var(--papel); outline: 1.500px dashed var(--tinta); outline-offset: 2px; }
+.d-anillo { width: 38px; height: 38px; border-radius: 50%; border: 2.500px solid rgba(61,140,255,.95); background: rgba(61,140,255,.22); opacity: 0; } .d-anillo.a1 { left: 96px; top: 30px; } .d-anillo.a2 { left: 176px; top: 62px; }
+.d-cap { left: 106px; top: 124px; display: flex; align-items: center; gap: 7px; height: 28px; padding: 0 12px; border-radius: 14px; background: #1c1c1f; color: #fff; font: 600 11.500px/1 var(--ui); font-variant-numeric: tabular-nums; }
+.esc .d-cap i { position: static; width: 9px; height: 9px; border-radius: 50%; background: rgb(255,69,59); }
+.d-dest { left: 176px; top: 20px; width: 112px; height: 120px; background: var(--papel); border: 1.500px dashed var(--tinta); }
+/* De dónde salió la miniatura: su hueco en la esquina */
+.d-origen { left: 16px; top: 106px; width: 80px; height: 52px; border: 1.500px dashed rgba(14,13,20,.34); border-radius: 8px; }
+.d-qa { left: 192px; top: 76px; width: 80px; height: 52px; border-radius: 8px; background: #1f1f24; box-shadow: 0 12px 20px -8px rgba(14,13,20,.55); }
+.d-qa i { inset: 5px; border-radius: 4px; background: var(--papel); }
+.activa .d-sel { animation: d-crecer .7s var(--ease) both; } .activa .d-etq { animation: d-entrar .3s .6s both; }
+.activa .d-rect { animation: d-entrar .3s .15s both; } .activa .d-res { animation: d-barra .5s .5s var(--ease) both; } .activa .d-num { animation: d-saltar .45s 1s var(--ease) both; }
+.activa .d-barrido { animation: d-ancho .7s var(--ease) both; } .activa .d-txt { animation: d-subir .45s .75s var(--ease) both; }
+.activa .d-win.w1 { animation: d-izq .9s var(--ease) both; } .activa .d-win.w2 { animation: d-der .9s var(--ease) both; }
+.activa .d-tira { animation: d-bajar 2s cubic-bezier(.45,0,.3,1) both; } .activa .d-mini i { animation: d-alto 2s cubic-bezier(.45,0,.3,1) both; }
+.activa .d-anillo.a1 { animation: d-anillo .6s .35s var(--ease) both; } .activa .d-anillo.a2 { animation: d-anillo .6s 1s var(--ease) both; } .activa .d-cap { animation: d-entrar .3s both; }
+.activa .d-qa { animation: d-soltar .9s .15s var(--ease) both; }
+@keyframes d-crecer { from { width: 0; height: 0; } }
+@keyframes d-entrar { from { opacity: 0; } }
+@keyframes d-barra { from { transform: scaleX(0); } }
+@keyframes d-saltar { from { transform: scale(0); } 60% { transform: scale(1.18); } }
+@keyframes d-ancho { from { width: 0; height: 0; } }
+@keyframes d-subir { from { opacity: 0; transform: translateY(10px); } }
+@keyframes d-izq { from { transform: translateX(-26px); } } @keyframes d-der { from { transform: translateX(26px); } }
+@keyframes d-bajar { from { transform: translateY(0); } } @keyframes d-alto { from { transform: scaleY(.3); } }
+@keyframes d-anillo { from { opacity: 1; transform: scale(.3); } to { opacity: 0; transform: scale(1); } }
+@keyframes d-soltar { from { transform: translate(-176px, 30px) rotate(-6deg); } }
+/* Anotar: las marcas del editor, con sus colores */
+.m-caja { position: relative; white-space: nowrap; color: var(--tinta); font-weight: 650; }
+.m-caja::after { content: ""; position: absolute; inset: -.12em -.28em -.14em; border: 2.5px solid var(--rojo); border-radius: 4px; }
+.m-res { padding: .06em .16em; margin: 0 -.16em; color: var(--tinta); font-weight: 650; background: var(--amarillo); border-radius: .14em .3em .18em .26em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.m-num { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; margin-right: .3em; border-radius: 50%; background: #dc2a20; color: #fff; font-weight: 800; font-size: .84em; vertical-align: .06em; }
+.m-pix { display: inline-block; width: 6.4em; height: 1em; vertical-align: -.14em; border-radius: 2px; background: conic-gradient(#b3b3bd 25%, #d9d9e0 0 50%, #9d9da8 0 75%, #cbcbd3 0) 0 0 / .5em .5em; }
 
 /* velocidad */
-.velocidad .panel { position: relative; padding: clamp(56px, 7vw, 96px) clamp(22px, 5vw, 72px); border-radius: 32px; overflow: hidden; color: #fff;
-  background: radial-gradient(55% 75% at 8% 0%, rgba(93,92,246,.85), transparent 70%), radial-gradient(50% 70% at 100% 100%, rgba(236,95,174,.75), transparent 70%), radial-gradient(45% 60% at 65% 15%, rgba(155,77,240,.7), transparent 70%), #120b24;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
-.velocidad .panel::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .18; mix-blend-mode: overlay;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.velocidad .cabeza p { color: rgba(255,255,255,.86); }
-.velocidad .cabeza p b { color: #fff; }
-.carrera { position: relative; z-index: 1; width: min(880px, 100%); margin: 0 auto; display: grid; gap: 22px; }
-.carril { display: grid; grid-template-columns: 140px minmax(0, 1fr) 90px; align-items: center; gap: 18px; }
-.carril span { font-weight: 650; color: #fff; white-space: nowrap; }
-.carril output { text-align: right; font-weight: 700; font-size: 22px; letter-spacing: -.02em; }
-.pista { position: relative; height: 16px; border-radius: 8px; background: rgba(255,255,255,.14); overflow: hidden; }
-.pista i { position: absolute; inset: 0; border-radius: 7px; transform-origin: left; transform: scaleX(0); }
-.carril.parpadeo .pista i { background: rgba(255,255,255,.45); }
-.carril.destello .pista i { background: #fff; }
-.carrera footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 10px; font-size: 15.5px; color: rgba(255,255,255,.86); }
-.carrera footer button { font: 650 15px/1 var(--font); color: #24124d; background: #fff; border: 0; border-radius: 999px; padding: 10px 16px; cursor: pointer; }
-.carrera footer button:hover { background: #ece6ff; }
-.tramos { position: relative; z-index: 1; width: min(880px, 100%); margin: 40px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.25); display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 15.5px; color: rgba(255,255,255,.86); }
-.tramos b { color: #fff; font-weight: 700; white-space: nowrap; }
+.cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin-top: clamp(56px, 6vw, 84px); }
+.cifras li { padding: 18px 22px 16px; }
+.cifras b { display: block; font-size: clamp(72px, 10.5vw, 150px); font-weight: 900; font-stretch: 112%; letter-spacing: -.05em; line-height: .9; font-variant-numeric: tabular-nums; }
+.cifras span { display: block; margin-top: 10px; font-size: 15px; color: var(--tinta-2); }
+.carrera { display: grid; gap: 22px; margin-top: clamp(64px, 7vw, 96px); }
+.carril { display: grid; grid-template-columns: 130px minmax(0, 1fr) 84px; align-items: center; gap: 18px; font-weight: 700; }
+.carril output { text-align: right; font-size: 21px; font-weight: 800; letter-spacing: -.02em; }
+.pista-c { position: relative; height: 18px; background: rgba(14,13,20,.1); overflow: hidden; }
+.pista-c i { position: absolute; inset: 0; transform-origin: left; transform: scaleX(0); background: rgba(14,13,20,.42); }
+.carril.destello .pista-c i { background: var(--azul); }
+.carrera footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 8px; font-size: 16px; color: var(--tinta-2); }
 
-/* barra de menús */
-.nativa .cuerpo { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: center; }
-.escritorio { position: relative; aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 1px var(--line-2);
-  background: radial-gradient(60% 60% at 20% 30%, rgba(93,92,246,.85), transparent 70%), radial-gradient(55% 55% at 85% 75%, rgba(236,95,174,.7), transparent 70%), radial-gradient(50% 50% at 60% 20%, rgba(155,77,240,.7), transparent 70%), #1a1030; }
-.menubar { display: flex; align-items: center; gap: 18px; height: 30px; padding: 0 14px; font-size: 13.5px; font-weight: 500; color: #fff; background: rgba(20,14,34,.45); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
-.menubar .der { margin-left: auto; display: flex; align-items: center; gap: 16px; }
-.menubar .der span.num { white-space: nowrap; }
-.menubar .der span:first-child { display: grid; place-items: center; width: 26px; height: 22px; border-radius: 5px; background: rgba(255,255,255,.22); }
-.menubar svg { width: 15px; height: 15px; fill: #fff; }
-.menu { position: absolute; right: 78px; top: 34px; width: min(330px, 70%); padding: 5px; border-radius: 11px; background: rgba(38,34,48,.82); -webkit-backdrop-filter: blur(24px) saturate(150%); backdrop-filter: blur(24px) saturate(150%); box-shadow: 0 0 0 .5px rgba(255,255,255,.18), 0 18px 40px -12px rgba(0,0,0,.7); font-size: 13.5px; }
-.menu li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 9px; border-radius: 6px; color: #eceaf2; cursor: default; }
-.menu li:hover, .menu li.sel { background: #4b4ad9; color: #fff; }
-.menu li span:last-child { color: rgba(255,255,255,.55); letter-spacing: .08em; }
+/* barra de menús: la de la Mac cruza toda la columna y el menú de Destello cuelga de su ícono, a la derecha */
+.menubar { display: flex; align-items: center; gap: 20px; height: 36px; padding: 0 16px; font: 500 13.5px var(--ui); color: var(--tinta); white-space: nowrap; }
+.menubar b { font-weight: 700; }
+.menubar .der { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.mb-ico { display: grid; place-items: center; width: 28px; height: 24px; border-radius: 5px; background: rgba(14,13,20,.1); transition: background-color .2s .15s; }
+.mb-ico svg { width: 15px; height: 15px; fill: var(--tinta); transition: fill .2s .15s; }
+#nativa.vivo .mb-ico { background: var(--tinta); } #nativa.vivo .mb-ico svg { fill: #fff; }
+.dos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+.dos > :first-child { padding: clamp(64px, 8vw, 116px) 56px 0 0; }
+.dos h2 { font-size: clamp(36px, 4.6vw, 68px); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 34px; }
+.chips li { padding: 6px 13px; border-radius: 999px; font-size: 14.5px; font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--tinta); }
+/* El menú queda bajo el ícono: su borde derecho coincide con el de la barra */
+.menu { justify-self: end; width: min(340px, 100%); margin: 7px 62px 24px 0; padding: 5px; border-radius: 11px; background: #f6f6f8; box-shadow: 0 0 0 .5px rgba(0,0,0,.2), 0 18px 40px -14px rgba(14,13,20,.4); font: 13.5px/1.5 var(--ui); color: #1d1d1f; transform-origin: calc(100% - 40px) 0; }
+.menu li { display: flex; justify-content: space-between; gap: 12px; padding: 3.5px 9px; border-radius: 6px; cursor: default; }
+.menu li:hover, .menu li.sel { background: var(--azul); color: #fff; }
+.menu:hover li.sel:not(:hover) { background: none; color: inherit; }
+.menu li span:last-child { color: rgba(0,0,0,.62); letter-spacing: .08em; }
 .menu li:hover span:last-child, .menu li.sel span:last-child { color: #fff; }
-.menu hr { border: 0; height: 1px; margin: 5px 9px; background: rgba(255,255,255,.12); }
-.nativa .texto h2 { text-align: left; }
-.nativa .texto p { margin-top: 18px; font-size: 18.5px; color: var(--text-2); max-width: 46ch; }
-.nativa .texto p b { color: var(--text); font-weight: 600; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
-.chips li { padding: 7px 13px; border-radius: 999px; font-size: 14.5px; font-weight: 550; color: var(--text); background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px var(--line); }
+.menu:hover li.sel:not(:hover) span:last-child { color: rgba(0,0,0,.62); }
+.menu hr { border: 0; height: 1px; margin: 5px 9px; background: rgba(0,0,0,.12); }
+#menu-capturar { cursor: pointer; }
+/* Se abre al entrar en vista: el ícono se pulsa, el menú cae y las filas aparecen en cascada */
+.anima #nativa:not(.vivo) .menu { opacity: 0; }
+#nativa.vivo .menu { animation: menu-abre .26s .3s var(--ease) both; }
+#nativa.vivo .menu li, #nativa.vivo .menu hr { animation: d-entrar .2s calc(.36s + var(--i, 0) * 22ms) both; }
+@keyframes menu-abre { from { opacity: 0; transform: translateY(-8px) scale(.97); } }
 
-/* privacidad */
-.tu-mac { position: relative; width: min(1040px, 100%); margin: 0 auto; padding: clamp(24px, 3.6vw, 44px) clamp(20px, 4.5vw, 60px) clamp(32px, 4vw, 48px); border-radius: 28px;
-  background: radial-gradient(55% 80% at 0% 0%, rgba(93,92,246,.30), transparent 70%), radial-gradient(45% 75% at 100% 100%, rgba(236,95,174,.20), transparent 70%), radial-gradient(40% 50% at 55% 0%, rgba(155,77,240,.16), transparent 70%), #110c1f;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 40px 80px -40px rgba(0,0,0,.9); }
-.tu-mac .rotulo { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--text-2); }
-.tu-mac .rotulo .ico { width: 18px; height: 18px; color: #c9a9ff; }
-.flujo { display: grid; grid-template-columns: auto minmax(36px, 1fr) auto minmax(36px, 1fr) auto; align-items: center; margin-top: clamp(24px, 3vw, 32px); }
+/* privacidad: el recuadro blanco es tu Mac. Dentro, tres tercios que se encadenan; lo único que cruza el borde sale por el cable punteado. */
+.tu-mac { margin-top: clamp(84px, 8vw, 112px); padding: clamp(52px, 6vw, 76px) clamp(18px, 3vw, 40px) clamp(64px, 7vw, 88px); }
+.rotulo { position: absolute; left: -1.5px; bottom: calc(100% + 1.5px); display: flex; align-items: center; gap: 7px; height: 28px; padding: 0 12px 0 10px; background: var(--tinta); color: #fff; font-size: 13.5px; font-weight: 650; }
+.rotulo .ico { width: 16px; height: 16px; }
+.flujo { display: grid; grid-template-columns: minmax(0, 1fr) clamp(36px, 5vw, 72px) minmax(0, 1fr) clamp(36px, 5vw, 72px) minmax(0, 1fr); align-items: center; }
 .paso { position: relative; display: grid; justify-items: center; }
-/* La nota cuelga bajo su paso para que los avisos del grabador no muevan el flujo. */
-.paso .nota { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); font-size: 14.5px; color: var(--text-2); white-space: nowrap; }
-.paso .nota.aviso { color: var(--text); }
-/* La primera nota se alinea con la primera tecla: centrada se saldría del contorno. */
-.paso:first-child .nota { left: 14px; transform: none; width: max-content; max-width: 230px; white-space: normal; text-wrap: balance; }
-.atajo { display: grid; place-items: center; min-width: 156px; height: 56px; padding: 0 14px; font: inherit; color: inherit; background: transparent; border: 0; border-radius: 999px; cursor: pointer;
-  box-shadow: inset 0 0 0 1px transparent; transition: background .2s, box-shadow .25s var(--ease); }
-.atajo:hover { background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px var(--line-2); }
-.atajo.grabando { outline: none; background: rgba(201,169,255,.08); box-shadow: inset 0 0 0 1.5px #c9a9ff, 0 0 0 6px rgba(201,169,255,.12); }
-.atajo:focus-visible { outline-offset: 4px; border-radius: 999px; }
-.teclas { display: flex; gap: 5px; font-size: 20px; }
-.teclas kbd { vertical-align: 0; }
+.paso .nota { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); width: max-content; max-width: 100%; font-size: 14.5px; color: var(--tinta-2); text-align: center; text-wrap: balance; }
+.paso .nota.aviso { color: var(--tinta); font-weight: 600; }
+.atajo { display: grid; place-items: center; min-width: 156px; height: 56px; padding: 0 14px; font: inherit; color: inherit; background: transparent; border: 0; border-radius: 999px; cursor: pointer; transition: background .2s; }
+.atajo:hover { background: rgba(14,13,20,.06); }
+.atajo.grabando { outline: 2px solid var(--azul); outline-offset: 2px; background: rgba(74,69,232,.08); }
+.teclas { display: flex; gap: 6px; font-size: 26px; }
 .teclas kbd.vacia { min-width: 2.6em; background: transparent; border-style: dashed; }
-.recorte { width: clamp(180px, 18vw, 210px); aspect-ratio: 470 / 178; border-radius: 10px; object-fit: cover;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.5), 0 0 0 5px rgba(201,169,255,.16), 0 18px 34px -16px rgba(0,0,0,.9); }
-/* Los hilos son líneas finas; la luz los recorre una vez al entrar en vista. */
-.hilo { position: relative; height: 1px; margin: 0 12px; background: rgba(255,255,255,.22); overflow: visible; }
-.hilo::after { content: ""; position: absolute; right: -1px; top: -3.5px; width: 7px; height: 7px; border: solid rgba(255,255,255,.4); border-width: 1px 1px 0 0; transform: rotate(45deg); }
+/* La captura de ejemplo se dibuja con las mismas piezas que las demostraciones de funciones; si el visitante hace una, la reemplaza. */
+.recorte { position: relative; width: min(300px, 100%); height: 124px; overflow: hidden; border: 1.5px solid var(--tinta); background: var(--velo); }
+.recorte > i { position: absolute; }
+.r-hoja { inset: 14px 44px; background: var(--papel); box-shadow: 0 0 0 1px var(--linea); }
+.r-b { left: 64px; height: 11px; background: #c6c6d1; }
+.recorte .espejo { position: absolute; inset: 0; }
+.hilo { position: relative; height: 1.5px; background: var(--linea); }
+.hilo::after { content: ""; position: absolute; right: -1px; top: -3.5px; width: 7px; height: 7px; border: solid var(--tinta); border-width: 1.5px 1.5px 0 0; transform: rotate(45deg); }
 .hilo i { position: absolute; inset: -1px 0; overflow: hidden; }
-.hilo i::before { content: ""; position: absolute; inset: 0; width: 45%; background: linear-gradient(90deg, transparent, #c9a9ff 60%, #fff); transform: translateX(-110%); }
-.destinos { position: relative; display: grid; gap: 10px; padding-left: 28px; }
-.destinos::before { content: ""; position: absolute; left: 0; top: 22px; bottom: 22px; width: 1px; background: rgba(255,255,255,.22); }
-.destinos li { position: relative; display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 18px 0 14px; border-radius: 999px; font-size: 15px; color: var(--text-2); white-space: nowrap;
-  background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px var(--line); }
-.destinos li::before { content: ""; position: absolute; left: -28px; top: 50%; width: 28px; height: 1px; background: rgba(255,255,255,.22); }
-.destinos li .ico { width: 18px; height: 18px; color: #c9a9ff; }
-.destinos li b { color: var(--text); font-weight: 600; }
-.salida { display: grid; justify-items: center; text-align: center; margin-top: -4px; }
-.salida .linea { position: relative; width: 0; height: 60px; border-left: 1px dashed rgba(255,255,255,.32); }
-.salida .linea::before { content: ""; position: absolute; left: -4.5px; top: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 0 0 1px rgba(255,255,255,.45); }
-.salida .externo { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; font-size: 14.5px; font-weight: 550; color: var(--text-2); box-shadow: inset 0 0 0 1px var(--line-2); }
-.salida .externo .ico { width: 16px; height: 16px; }
-.salida p { max-width: 520px; margin-top: 16px; font-size: 16px; color: var(--text-2); text-wrap: balance; }
-.salida p b { color: var(--text); font-weight: 600; }
-.tu-mac.vivo .hilo i::before { animation: hilo .55s var(--ease) both; }
-.tu-mac.vivo .hilo:nth-child(4) i::before { animation-delay: .5s; }
-.tu-mac.vivo .recorte { animation: tomar .9s var(--ease) .35s both; }
-.tu-mac.vivo .destinos li { animation: llegar 1.1s var(--ease) both; }
-.tu-mac.vivo .destinos li:nth-child(1) { animation-delay: .95s; }
-.tu-mac.vivo .destinos li:nth-child(2) { animation-delay: 1.05s; }
-.tu-mac.vivo .destinos li:nth-child(3) { animation-delay: 1.15s; }
-@keyframes hilo { to { transform: translateX(240%); } }
-@keyframes tomar { 30% { box-shadow: 0 0 0 1px #fff, 0 0 0 7px rgba(201,169,255,.4), 0 18px 34px -16px rgba(0,0,0,.9); } }
-@keyframes llegar { 25% { background: rgba(201,169,255,.14); box-shadow: inset 0 0 0 1px rgba(201,169,255,.6); } }
+.hilo i::before { content: ""; position: absolute; inset: 0; width: 55%; background: var(--azul); transform: translateX(-110%); }
+.destinos { display: grid; gap: 10px; width: min(340px, 100%); margin-inline: auto; }
+.destinos li { display: flex; align-items: center; gap: 12px; height: 46px; padding: 0 18px 0 14px; border-radius: 999px; font-size: 15px; color: var(--tinta-2); white-space: nowrap; box-shadow: inset 0 0 0 1.5px var(--tinta); }
+.destinos li b { color: var(--tinta); font-weight: 700; }
+.destinos li span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.destinos .ico { width: 18px; height: 18px; color: var(--tinta); }
+/* La salida: el cable baja desde el borde del recuadro hasta lo único que está fuera */
+.salida { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 22px; align-items: center; margin-left: clamp(18px, 3vw, 40px); }
+.cable { position: relative; grid-column: 1; justify-self: center; width: 1.5px; height: 58px; background: repeating-linear-gradient(var(--tinta) 0 5px, transparent 5px 10px); }
+.cable i { position: absolute; left: -3.5px; top: -4px; width: 8.5px; height: 8.5px; border-radius: 50%; background: var(--azul); opacity: 0; }
+.fuera { grid-column: 1; display: inline-flex; align-items: center; height: 36px; padding: 0 14px; border-radius: 999px; font-size: 14.5px; font-weight: 650; box-shadow: inset 0 0 0 1.5px var(--tinta); }
+.salida p { grid-column: 2; grid-row: 2; max-width: 56ch; font-size: 16px; color: var(--tinta-2); }
+.salida p b { color: var(--tinta); font-weight: 650; }
+/* El recorrido, una vez al entrar en vista y cada vez que cambia el atajo */
+.tu-mac.vivo .teclas kbd { animation: tecla .34s var(--ease) both; }
+.tu-mac.vivo .teclas kbd:nth-child(2) { animation-delay: .07s; } .tu-mac.vivo .teclas kbd:nth-child(3) { animation-delay: .14s; } .tu-mac.vivo .teclas kbd:nth-child(4) { animation-delay: .21s; }
+.tu-mac.vivo .hilo i::before { animation: hilo .5s .32s var(--ease) both; }
+.tu-mac.vivo .hilo:nth-child(4) i::before { animation-delay: 1.05s; }
+.tu-mac.vivo .recorte { animation: tomar .55s .62s var(--ease) both; }
+.tu-mac.vivo .destinos li { animation: llegar 1s var(--ease) both; }
+.tu-mac.vivo .destinos li:nth-child(1) { animation-delay: 1.4s; } .tu-mac.vivo .destinos li:nth-child(2) { animation-delay: 1.52s; } .tu-mac.vivo .destinos li:nth-child(3) { animation-delay: 1.64s; }
+.tu-mac.vivo + .salida .cable i { animation: bajar 1s 2.1s var(--ease) both; }
+@keyframes tecla { 45% { transform: translateY(2px); background: var(--tinta); color: #fff; } }
+@keyframes hilo { to { transform: translateX(190%); } }
+@keyframes tomar { from { clip-path: inset(0 100% 100% 0); } to { clip-path: inset(0); } }
+@keyframes llegar { 25% { background: rgba(74,69,232,.16); } }
+@keyframes bajar { 0% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(58px); } }
 
 /* precio */
-.plan-borde { width: min(520px, 100%); margin: 0 auto; padding: 1px; border-radius: 24px; background: var(--marca); }
-.plan { position: relative; padding: 36px; border-radius: 23px; background: var(--bg-2); text-align: left; }
-.plan .nombre { font-weight: 650; color: var(--text-2); }
-.plan .cifra { display: flex; align-items: baseline; gap: 12px; margin-top: 8px; }
-.plan .cifra b { font-size: 76px; font-weight: 800; letter-spacing: -.05em; line-height: 1; }
-.plan .cifra span { color: var(--text-2); }
-.plan .despues { margin-top: 10px; color: var(--text-2); }
-.plan .despues b { color: var(--text); }
-.plan ul { margin: 26px 0 30px; display: grid; gap: 12px; }
-.plan li { display: flex; gap: 12px; color: var(--text); }
-.plan li .ico { color: #c9a9ff; margin-top: 3px; stroke-width: 2.4; width: 18px; height: 18px; }
+.plan { width: 50%; margin-top: clamp(56px, 6vw, 84px); padding: 34px 36px 36px; }
+.plan .cifra { display: flex; align-items: baseline; gap: 14px; }
+.plan .cifra b { font-size: clamp(110px, 14vw, 180px); font-weight: 900; font-stretch: 112%; letter-spacing: -.06em; line-height: .86; }
+.plan .cifra span, .plan .despues { color: var(--tinta-2); }
+.plan .despues { margin-top: 14px; }
+.plan .despues b { color: var(--tinta); }
+.plan ul { margin: 24px 0 30px; display: grid; gap: 10px; }
+.plan li { display: flex; gap: 12px; }
+.plan li .ico { margin-top: 4px; width: 18px; height: 18px; color: var(--azul); stroke-width: 2.8; }
 .plan .btn { width: 100%; }
-.plan .meta { margin-top: 14px; text-align: center; font-size: 14px; color: var(--muted); }
+.plan .meta { margin-top: 14px; text-align: center; font-size: 14px; color: var(--tinta-2); }
 
 /* preguntas */
-.preguntas { width: min(820px, 100%); margin: 0 auto; }
-.preguntas details { border-top: 1px solid var(--line); }
-.preguntas details:last-child { border-bottom: 1px solid var(--line); }
-.preguntas summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; font-size: 19px; font-weight: 650; letter-spacing: -.01em; cursor: pointer; list-style: none; }
+.preguntas { margin-top: clamp(48px, 5vw, 72px); border-bottom: 1.5px solid var(--tinta); }
+.preguntas details { border-top: 1.5px solid var(--tinta); }
+.preguntas summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 0; font-size: 20px; font-weight: 750; letter-spacing: -.015em; cursor: pointer; list-style: none; }
 .preguntas summary::-webkit-details-marker { display: none; }
-.preguntas summary .ico { color: var(--muted); transition: transform .3s var(--ease); }
+.preguntas summary .ico { transition: transform .3s var(--ease); }
 .preguntas details[open] summary .ico { transform: rotate(45deg); }
-.preguntas details p { padding: 0 0 24px; max-width: 64ch; color: var(--text-2); }
+.preguntas details p { padding: 0 0 24px; max-width: 62ch; color: var(--tinta-2); }
 
 /* cierre */
-.cierre { padding: 160px 0 140px; text-align: center; isolation: isolate; overflow: hidden; }
-.cierre .aurora::before { top: 40px; }
-.cierre .aurora::after { top: 120px; }
-.cierre img { width: 96px; height: 96px; margin: 0 auto 30px; }
-.cierre h2 { max-width: 14ch; margin: 0 auto; }
-.cierre .acciones { margin-top: 36px; }
+.cierre { padding-bottom: clamp(80px, 10vw, 130px); }
+.cierre .marco { padding: clamp(36px, 6vw, 84px) clamp(22px, 5vw, 72px); }
+.cierre h2 { font-size: clamp(42px, 8.4vw, 132px); max-width: 11ch; }
+.pie { border-top: 1.5px solid var(--tinta); padding: 26px 0 48px; font-size: 14.5px; color: var(--tinta-2); }
 
-footer.pie { border-top: 1px solid var(--line); padding: 28px 0 44px; font-size: 14px; color: var(--muted); }
-footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }
+/* ── La demo: interfaz de Destello fuera de .pagina, para que no salga en las capturas ── */
+.selector { position: fixed; inset: 0; z-index: 30; cursor: crosshair; touch-action: none; -webkit-user-select: none; user-select: none; }
+.selector svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.selector .sombra { fill: rgba(14,13,20,.32); fill-rule: evenodd; }
+.selector .caja { fill: none; stroke: #fff; stroke-width: 1; }
+.selector .guia { stroke: rgba(255,255,255,.7); stroke-width: 1; stroke-dasharray: 4 4; }
+.etq { position: absolute; left: 0; top: 0; height: 22px; padding: 0 8px; border-radius: 5px; background: rgba(20,20,26,.86); color: #fff; font: 12px/22px Helvetica, Arial, sans-serif; font-variant-numeric: tabular-nums; white-space: nowrap; pointer-events: none; }
+.lupa { position: absolute; left: 0; top: 0; width: 128px; height: 128px; border-radius: 50%; overflow: hidden; background: var(--velo); box-shadow: 0 0 0 2px #fff, 0 10px 24px -6px rgba(14,13,20,.5); pointer-events: none; }
+.lupa::after { content: ""; position: absolute; left: 60px; top: 60px; width: 8px; height: 8px; box-shadow: 0 0 0 1.5px rgba(51,153,255,.95); }
+.aviso { position: fixed; z-index: 45; left: 50%; top: 18px; transform: translateX(-50%); display: flex; align-items: center; min-height: 40px; max-width: calc(100% - 24px); padding: 8px 16px; border-radius: 12px; background: rgba(28,28,31,.94); color: #fff; font: 600 13px/1.35 var(--ui); text-align: center; box-shadow: 0 12px 30px -6px rgba(14,13,20,.5); pointer-events: none; }
 
-@media (max-width: 980px) {
-  .barra nav { display: none; }
-  .barra .btn { margin-left: auto; }
-  .nativa .cuerpo { grid-template-columns: 1fr; gap: 44px; }
-  .detalle { grid-template-columns: 1fr; gap: 18px; }
-  /* El flujo se apila: los hilos pasan a verticales y los destinos se centran. */
+/* Un espejo es un clon inerte de la página encuadrado en un rectángulo */
+.espejo { position: relative; overflow: hidden; background: var(--velo); pointer-events: none; }
+.espejo > .pagina { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.espejo > svg.marcas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.pila { position: fixed; z-index: 25; left: 18px; bottom: 18px; display: flex; flex-direction: column-reverse; gap: 10px; }
+.qa { position: relative; width: 232px; border-radius: 12px; overflow: hidden; background: rgb(31,31,36); color: #fff; box-shadow: 0 0 0 .5px rgba(0,0,0,.4), 0 14px 34px -6px rgba(0,0,0,.45), 0 3px 8px rgba(0,0,0,.18); }
+.qa .ctl { position: absolute; inset: 0; background: rgba(0,0,0,.5); opacity: 0; }
+.qa:hover .ctl, .qa:focus-within .ctl, .qa.nueva .ctl { opacity: 1; }
+.qa .mid { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; gap: 8px; }
+.qa button { border: 0; padding: 0; font: 600 13px/1 var(--ui); cursor: pointer; }
+.qa .mid button { width: 84px; height: 28px; border-radius: 14px; background: rgba(255,255,255,.94); color: rgb(26,26,31); }
+.qa .cb { position: absolute; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 12px; background: rgba(0,0,0,.5); color: #fff; }
+.qa .cb svg, .fijada button svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.qa .cb.tl { left: 8px; top: 8px; } .qa .cb.tr { right: 8px; top: 8px; } .qa .cb.br { right: 8px; bottom: 8px; }
+
+.fijada { position: fixed; z-index: 24; border-radius: 4px; overflow: hidden; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; box-shadow: 0 0 0 1px rgba(14,13,20,.3), 0 18px 44px -8px rgba(14,13,20,.5), 0 4px 12px rgba(14,13,20,.22); }
+.fijada:active { cursor: grabbing; }
+.fijada button { position: absolute; left: 6px; top: 6px; display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 12px; background: rgba(0,0,0,.6); color: #fff; opacity: 0; cursor: pointer; }
+.fijada:hover button, .fijada button:focus-visible { opacity: 1; }
+
+.ed-fondo { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 16px; background: rgba(14,13,20,.32); }
+.ed { display: grid; grid-template-rows: 30px 46px minmax(0, 1fr) 48px; width: min(940px, 100%); height: min(640px, 100%); border-radius: 12px; overflow: hidden; background: #ececec; color: #1d1d1f; font: 13px var(--ui); box-shadow: 0 0 0 .5px rgba(0,0,0,.3), 0 28px 70px -10px rgba(0,0,0,.5); }
+.ed :focus-visible { outline-color: rgb(0,122,255); }
+.ed .tit { display: flex; align-items: center; gap: 8px; padding: 0 12px; font-weight: 700; }
+.ed .tit span { margin-left: 8px; }
+.ed .luz { width: 12px; height: 12px; padding: 0; border: 0; border-radius: 50%; background: #ff5f57; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.15); }
+button.luz { cursor: pointer; }
+.ed .luz:nth-child(2) { background: #febc2e; } .ed .luz:nth-child(3) { background: #28c840; }
+.ed .herr { display: flex; align-items: center; justify-content: center; gap: 14px; border-bottom: 1px solid #d6d6d6; }
+.seg { display: flex; align-items: center; height: 28px; padding: 2px; border-radius: 7px; background: #e1e1e3; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.08); }
+.seg button { display: grid; place-items: center; width: 32px; height: 24px; padding: 0; border: 0; border-radius: 5px; background: none; color: #3a3a3c; cursor: pointer; }
+.seg button svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.seg button[aria-pressed="true"] { background: rgb(0,122,255); color: #fff; }
+.seg.col button { width: 26px; }
+.seg.col b { width: 13px; height: 13px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1px rgba(128,128,128,.6); }
+.seg.col button[aria-pressed="true"] { background: rgba(0,0,0,.18); }
+.seg button:disabled { color: #b4b4b8; cursor: default; }
+.ed .lienzo { display: grid; place-items: center; min-height: 0; overflow: hidden; background: #1e1e21; }
+.ed .hoja { position: relative; cursor: crosshair; touch-action: none; }
+.ed .hoja > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ed .pie-ed { display: flex; align-items: center; gap: 8px; padding: 0 14px; border-top: 1px solid #d6d6d6; }
+.ed .tam { margin-right: auto; font-size: 12px; font-variant-numeric: tabular-nums; color: rgba(0,0,0,.55); }
+.ed .bt { display: flex; align-items: center; gap: 5px; height: 28px; padding: 0 12px; border: 0; border-radius: 7px; font: 13px var(--ui); color: #1d1d1f; background: #fff; box-shadow: 0 0 0 .5px rgba(0,0,0,.12), 0 .5px 1.5px rgba(0,0,0,.12); cursor: pointer; }
+.ed .bt svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ed .bt.acc { background: rgb(0,122,255); color: #fff; }
+
+@media (max-width: 900px) {
+  .wrap { width: calc(100% - 36px); }
+  section > .wrap::before, section > .wrap::after { width: 13px; height: 13px; top: calc(var(--sec) * -.5 - 6px); }
+  section > .wrap::before { left: -6px; } section > .wrap::after { right: -6px; }
+  .dos { grid-template-columns: 1fr; gap: 40px; }
+  .menubar .lejos { display: none; }
+  .menu { margin-right: 28px; }
+  /* En una columna cada función lleva su panel debajo; no hay selección que se deslice. */
+  .fn-lista { grid-template-columns: 1fr; }
+  .fn-sel { display: none; }
+  .fn-nombre { padding: 0; color: var(--tinta); cursor: default; }
+  .fn-item h3 { margin-top: 44px; } .fn-item:first-of-type h3 { margin-top: 0; }
+  .det { grid-column: 1; grid-row: auto; margin-top: 16px; padding: 14px 14px 22px; visibility: visible; opacity: 1; }
+  .demo { height: 180px; }
+  .centro h1 { margin-top: 52px; }
+  .sel-ancho { width: 100%; }
+  .dos > :first-child { padding-right: 0; order: 2; padding-top: 0; }
+  .plan { width: 100%; }
+  .hero { min-height: 0; }
   .flujo { grid-template-columns: 1fr; justify-items: center; }
-  .paso { gap: 10px; }
-  .paso .nota, .paso:first-child .nota { position: static; transform: none; max-width: none; white-space: normal; text-align: center; }
-  .hilo { width: 1px; height: 40px; margin: 14px 0; }
+  .paso { gap: 10px; width: 100%; }
+  .paso .nota { position: static; transform: none; }
+  .hilo { width: 1.5px; height: 34px; margin: 16px 0; }
   .hilo::after { right: -3px; top: auto; bottom: 0; transform: rotate(135deg); }
-  .hilo i::before { width: 100%; height: 45%; background: linear-gradient(180deg, transparent, #c9a9ff 60%, #fff); transform: translateY(-110%); }
-  .destinos { width: 100%; padding-left: 0; margin-bottom: 0; justify-items: center; }
-  .destinos li { max-width: 100%; padding: 0 16px; font-size: 14px; }
-  .destinos li span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .hilo i::before { width: 100%; height: 55%; transform: translateY(-110%); }
+  @keyframes hilo { to { transform: translateY(190%); } }
   .tu-mac .flujo > li:last-child { width: 100%; }
-  .destinos::before, .destinos li::before { display: none; }
-  .salida { margin-top: -4px; }
-  @keyframes hilo { to { transform: translateY(240%); } }
+  .salida { margin-left: 18px; column-gap: 14px; } .salida p { grid-column: 1 / -1; grid-row: auto; margin-top: 14px; } .fuera { justify-self: start; } .cable { justify-self: start; margin-left: 40px; }
+  .nav { grid-template-columns: 1fr auto; } .nav nav { display: none; }
 }
 @media (max-width: 640px) {
-  :root { --wrap: calc(100% - 36px); }
-  body { font-size: 16.5px; }
-  .portada { padding-top: 104px; }
-  .portada .apoyo { font-size: 18px; }
-  .acciones .btn { width: 100%; }
-  .toma { margin-top: 40px; }
-  .marco { border-radius: 14px; }
-  section { padding-top: 104px; }
-  .pestanas { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; width: 100%; }
-  .pestanas button { flex: none; }
-  .carril { grid-template-columns: 96px minmax(0, 1fr) 66px; gap: 12px; }
-  .carril span { font-size: 15px; }
-  .carril output { font-size: 18px; }
-  .tramos { flex-direction: column; }
-  .menu { right: 12px; top: 34px; font-size: 12px; width: 76%; }
-  .menubar > span:nth-child(n+3) { display: none; }
+  .pagina { font-size: 17px; }
+  .cta .btn { width: 100%; }
+  .pila { left: 12px; bottom: 12px; } .qa { width: 200px; }
+  .carril { grid-template-columns: 92px minmax(0, 1fr) 64px; gap: 10px; font-size: 15px; } .carril output { font-size: 17px; }
+  .cifras { grid-template-columns: 1fr; gap: 22px; }
   .plan { padding: 26px; }
-  .plan .cifra b { font-size: 64px; }
-  .cierre { padding: 120px 0 104px; }
+  .ed .herr { gap: 8px; } .seg button { width: 28px; }
 }
+@media (hover: none) { .qa .ctl { opacity: 1; background: rgba(0,0,0,.3); } .fijada button { opacity: 1; } .selector .lupa { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .toma.destella .flash, .toma.destella .chispa { animation: none; }
-  .tu-mac.vivo .hilo i::before, .tu-mac.vivo .recorte, .tu-mac.vivo .destinos li { animation: none; }
-  .btn, .btn::before, .btn::after, .barra { transition: none; }
+  .btn, .preguntas summary .ico { transition: none; }
+  .palabra.destello::after, .h-chispa.salta, .esc *, .esc * * { animation: none !important; }
+  .fn-sel, .fn-nombre { transition: none; }
+  .tu-mac.vivo *, .tu-mac.vivo *::before, .tu-mac.vivo + .salida .cable i, #nativa.vivo .menu, #nativa.vivo .menu * { animation: none !important; }
 }
 </style>
 <script defer src="https://stats.gomflo.dev/script.js" data-website-id="ca785f30-74e2-4b25-8a32-9621a6aa1bf7" data-domains="gomflo.dev" data-performance="true"></script>
@@ -324,103 +409,153 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-bajar" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5Z"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></symbol>
   <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-mac" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M8.5 20h7M12 16.5V20"/></symbol>
-  <symbol id="i-candado" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
-  <symbol id="i-carpeta" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2.2h7a2 2 0 0 1 2 2v7.8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2Z"/></symbol>
-  <symbol id="i-texto" viewBox="0 0 24 24"><path d="M5 6.5h14M12 6.5v12M8.5 18.5h7"/></symbol>
-  <symbol id="i-portapapeles" viewBox="0 0 24 24"><rect x="5.5" y="5" width="13" height="16" rx="2.2"/><path d="M9 5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v.5a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z"/></symbol>
-  <symbol id="i-red" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5s1.1-6.1 3.4-8.5Z"/></symbol>
-  <symbol id="i-flecha-arriba" viewBox="0 0 24 24"><path d="M12 19V6m0 0-5 5m5-5 5 5"/></symbol>
-  <symbol id="i-ojo" viewBox="0 0 24 24"><path d="M2.8 12s3.4-6.2 9.2-6.2 9.2 6.2 9.2 6.2-3.4 6.2-9.2 6.2S2.8 12 2.8 12Z"/><circle cx="12" cy="12" r="2.8"/></symbol>
-  <symbol id="i-destello" viewBox="0 0 24 24"><path d="M10 3.2c.5 4.6 2.2 6.3 6.8 6.8-4.6.5-6.3 2.2-6.8 6.8-.5-4.6-2.2-6.3-6.8-6.8 4.6-.5 6.3-2.2 6.8-6.8Zm8.2 10.6c.25 2 1 2.8 3 3-2 .25-2.75 1-3 3-.25-2-1-2.75-3-3 2-.2 2.75-1 3-3Z"/></symbol>
+  <symbol id="i-carpeta" viewBox="0 0 24 24"><path d="M3.500 7.500a2 2 0 0 1 2-2h4l2 2.200h7a2 2 0 0 1 2 2v7.800a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2Z"/></symbol>
+  <symbol id="i-texto" viewBox="0 0 24 24"><path d="M5 6.500h14M12 6.500v12M8.500 18.500h7"/></symbol>
+  <symbol id="i-portapapeles" viewBox="0 0 24 24"><rect x="5.500" y="5" width="13" height="16" rx="2.200"/><path d="M9 5a1.500 1.500 0 0 1 1.500-1.500h3A1.500 1.500 0 0 1 15 5v.500a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z"/></symbol>
+  <symbol id="i-area" viewBox="0 0 24 24"><path d="M4 9V6.500A2.500 2.500 0 0 1 6.500 4H9m6 0h2.500A2.500 2.500 0 0 1 20 6.500V9m0 6v2.500a2.500 2.500 0 0 1-2.500 2.500H15m-6 0H6.500A2.500 2.500 0 0 1 4 17.500V15"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.500" r="7"/><path d="M12 10v3.500l2.300 1.800M9.500 3.500h5"/></symbol>
+  <symbol id="i-rejilla" viewBox="0 0 24 24"><rect x="4" y="4" width="6.500" height="6.500" rx="1.500"/><rect x="13.500" y="4" width="6.500" height="6.500" rx="1.500"/><rect x="4" y="13.500" width="6.500" height="6.500" rx="1.500"/><rect x="13.500" y="13.500" width="6.500" height="6.500" rx="1.500"/></symbol>
+  <symbol id="i-candado" viewBox="0 0 24 24"><rect x="5" y="10.500" width="14" height="9.500" rx="2.200"/><path d="M8.500 10.500V8a3.500 3.500 0 0 1 7 0v2.500"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-lapiz" viewBox="0 0 24 24"><path d="m4 20 1-4.200L16.400 4.400a2.200 2.200 0 0 1 3.100 3.100L8.200 19 4 20Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 4h6l-1 5.500 3 3H7l3-3L9 4Zm3 8.500V20"/></symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M6 18 18 6m0 0H9.500M18 6v8.500"/></symbol>
+  <symbol id="i-rect" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="1.500"/></symbol>
+  <symbol id="i-res" viewBox="0 0 24 24"><path d="M4 19h16M7 14l7.500-9 4 3.300L11 17.300 7 14Z"/></symbol>
+  <symbol id="i-uno" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M10.600 9.600 12.600 8v8"/></symbol>
+  <symbol id="i-deshacer" viewBox="0 0 24 24"><path d="M9 6.500 5 10.500l4 4m-4-4h9a4.500 4.500 0 0 1 0 9h-2"/></symbol>
+  <symbol id="i-copiar" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="i-logo" viewBox="0 0 64 64"><rect x="7" y="7" width="50" height="50" fill="#0e0d14"/><path fill="#fff" d="M32 12Q34.600 29.400 52 32Q34.600 34.600 32 52Q29.400 34.600 12 32Q29.400 29.400 32 12Z"/><rect x="2.500" y="2.500" width="10" height="10" fill="#fff" stroke="#0e0d14" stroke-width="2.800"/><rect x="51.500" y="51.500" width="10" height="10" fill="#fff" stroke="#0e0d14" stroke-width="2.800"/></symbol>
+  <symbol id="i-destello" viewBox="0 0 24 24"><path d="M10 3.200c.5 4.600 2.200 6.300 6.800 6.800-4.600.5-6.300 2.200-6.800 6.800-.5-4.600-2.200-6.300-6.800-6.800 4.600-.5 6.300-2.200 6.800-6.800Zm8.200 10.600c.25 2 1 2.800 3 3-2 .25-2.750 1-3 3-.25-2-1-2.750-3-3 2-.2 2.750-1 3-3Z"/></symbol>
 </svg>
 
+<div class="pagina" id="pagina">
 <header class="barra" id="barra">
-  <div class="wrap">
-    <a class="marca" href="#" aria-label="Destello, inicio"><img src="assets/icon-64.png" alt="">Destello</a>
-    <nav aria-label="Secciones">
-      <a href="#funciones">Funciones</a>
-      <a href="#velocidad">Velocidad</a>
-      <a href="#precio">Precio</a>
-      <a href="#preguntas">Preguntas</a>
-    </nav>
-    <a class="btn" href="downloads/Destello.dmg" data-umami-event="Descarga" data-umami-event-lugar="nav"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar</a>
+  <div class="nav wrap">
+    <a class="marca" href="#" aria-label="Destello, inicio"><svg class="logo" aria-hidden="true"><use href="#i-logo"/></svg>Destello</a>
+    <nav aria-label="Secciones"><a href="#funciones">Funciones</a><a href="#velocidad">Velocidad</a><a href="#precio">Precio</a><a href="#preguntas">Preguntas</a></nav>
+    <a class="btn" href="downloads/Destello.dmg" data-umami-event="Descarga" data-umami-event-lugar="nav">Descargar</a>
   </div>
 </header>
 
 <main>
-  <div class="portada">
-    <div class="aurora" aria-hidden="true"></div>
+  <div class="hero" id="hero">
+    <svg class="hero-sel" id="hero-sel" aria-hidden="true">
+      <rect class="hoyo" id="h-hoyo"/><rect class="borde" id="h-borde"/><path class="corte" id="h-corte"/><g id="h-asas"></g>
+    </svg>
+    <span class="medida num" id="h-medida" aria-hidden="true"></span>
+    <svg class="h-cursor" id="h-cursor" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M12 1v22M1 12h22"/></svg>
+    <svg class="h-chispa" id="h-chispa" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 1Q15.690 12.310 27 14Q15.690 15.690 14 27Q12.310 15.690 1 14Q12.310 12.310 14 1Z"/></svg>
     <div class="wrap">
-      <h1>Capturas de pantalla para Mac, más rápidas que un parpadeo.</h1>
-      <p class="apoyo">Destello <b>captura, anota, copia texto y graba</b> tu pantalla con un solo atajo. Del clic al portapapeles en unos <b>10&nbsp;ms</b>.</p>
-      <div class="acciones">
-        <a class="btn" href="downloads/Destello.dmg" data-umami-event="Descarga" data-umami-event-lugar="hero"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar gratis para Mac</a>
-        <a class="btn sec" href="#funciones"><svg class="ico" aria-hidden="true" style="fill:currentColor;stroke:none"><use href="#i-play"/></svg>Ver cómo funciona</a>
-      </div>
-      <p class="requisitos">Gratis durante la beta · macOS 15 o posterior · Apple Silicon · 2.1&nbsp;MB</p>
-      <figure class="toma" id="toma">
-        <div class="marco">
-          <video id="toma-video" src="media/funciones-marca/recorrido.mp4" poster="media/funciones-marca/recorrido.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Destello capturando un área, anotándola y arrastrándola desde la vista rápida"></video>
-          <span class="flash" aria-hidden="true"></span>
+      <div class="centro">
+        <div class="sel-ancho"><span class="palabra" id="palabra" aria-hidden="true">Captura.</span></div>
+        <h1>Capturas de pantalla para Mac, más rápidas que un parpadeo.</h1>
+        <p class="apoyo">Arrastras, sueltas y ya está en tu portapapeles: <b>unos 10&nbsp;ms</b>. Con un solo atajo también anotas, copias texto, fijas y grabas.</p>
+        <div class="cta">
+          <a class="btn" href="downloads/Destello.dmg" data-umami-event="Descarga" data-umami-event-lugar="hero"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar gratis para Mac</a>
+          <span class="req">Beta gratis · macOS 15 o posterior · Apple Silicon · 2.1&nbsp;MB</span>
         </div>
-        <svg class="chispa" aria-hidden="true"><use href="#i-destello"/></svg>
-      </figure>
+        <p class="pista"><span id="pista-teclas"><kbd>⌥</kbd><kbd>⇧</kbd><kbd>⌘</kbd><kbd>4</kbd></span> <span id="pista-texto">¿Quieres sentirlo? Pulsa el atajo o</span> <button type="button" id="probar">captura un pedazo de esta página.</button></p>
+      </div>
     </div>
   </div>
 
-
-  <section class="escaparate" id="funciones">
+  <section id="funciones">
     <div class="wrap">
-      <div class="cabeza">
-        <h2>Un atajo. Todo lo que haces con tu pantalla.</h2>
-        <p>Pulsa <kbd>⌥</kbd> <kbd>⇧</kbd> <kbd>⌘</kbd> <kbd>4</kbd> y elige qué hacer. Cada función tiene también <b>su propio atajo</b>.</p>
+      <h2>Un atajo.<br>Todo lo demás.</h2>
+      <p class="entrada">Todo empieza en el selector: pulsas <kbd>⌥</kbd><kbd>⇧</kbd><kbd>⌘</kbd><kbd>4</kbd> y eliges qué hacer.</p>
+      <div class="fn-lista" id="fn-lista">
+        <i class="fn-sel marco" id="fn-sel" aria-hidden="true"></i>
+        <div class="fn-item">
+          <h3><button class="fn-nombre" type="button" aria-expanded="false">Capturar</button></h3>
+          <div class="det marco">
+            <div class="demo" aria-hidden="true"><div class="esc e-capturar"><i class="d-sel"></i><span class="d-etq num">220 × 110</span></div></div>
+            <p class="cuerpo"><b>Área, ventana o pantalla.</b> Espacio alterna entre área y ventana, Intro captura la pantalla completa. Mientras eliges tienes lupa, guías en cruz y el tamaño exacto en píxeles.</p>
+          </div>
+        </div>
+        <div class="fn-item">
+          <h3><button class="fn-nombre" type="button" aria-expanded="false">Anotar</button></h3>
+          <div class="det marco">
+            <div class="demo" aria-hidden="true"><div class="esc e-anotar"><i class="d-hoja"></i><i class="b" style="left:54px;top:38px;width:120px"></i><i class="b" style="left:54px;top:72px;width:170px"></i><i class="b" style="left:54px;top:106px;width:90px"></i><i class="d-rect"></i><i class="d-res"></i><i class="d-num">1</i></div></div>
+            <p class="cuerpo"><span class="m-num">1</span><span class="m-caja">Señala</span> con flecha, rectángulo, elipse, línea, texto o lápiz, cada una con su tecla. <span class="m-num">2</span><span class="m-res">Resalta lo que importa</span> y numera los pasos. <span class="m-num">3</span>Antes de compartir, tapa lo que no va: <span class="m-pix" role="img" aria-label="un correo pixelado"></span></p>
+          </div>
+        </div>
+        <div class="fn-item">
+          <h3><button class="fn-nombre" type="button" aria-expanded="false">Copiar texto</button></h3>
+          <div class="det marco">
+            <div class="demo" aria-hidden="true"><div class="esc e-texto"><i class="d-hoja"></i><i class="b" style="left:54px;top:38px;width:150px"></i><i class="b" style="left:54px;top:62px;width:180px"></i><i class="b" style="left:54px;top:86px;width:110px"></i><i class="d-barrido"></i><span class="d-txt"><i></i><i></i></span></div></div>
+            <p class="cuerpo">De videos, PDFs escaneados o apps que no te dejan copiar. Vision lo lee <b>en tu Mac</b>, en español e inglés, con acentos y ñ, y también códigos QR. En tu portapapeles en unos 85&nbsp;ms.</p>
+          </div>
+        </div>
+        <div class="fn-item">
+          <h3><button class="fn-nombre" type="button" aria-expanded="false">Fijar</button></h3>
+          <div class="det marco">
+            <div class="demo" aria-hidden="true"><div class="esc e-fijar"><i class="d-win w1"></i><i class="d-win w2"></i><span class="d-pin"><i></i><i></i></span></div></div>
+            <p class="cuerpo">Deja un diseño o unas medidas <b>flotando sobre tus ventanas</b>. Tamaño con la rueda, opacidad con las teclas 1 a 9 y un modo bloqueado que deja pasar los clics.</p>
+          </div>
+        </div>
+        <div class="fn-item">
+          <h3><button class="fn-nombre" type="button" aria-expanded="false">Página completa</button></h3>
+          <div class="det marco">
+            <div class="demo" aria-hidden="true"><div class="esc e-pagina"><span class="d-reg"><i class="d-tira"></i></span><span class="d-mini"><i></i></span></div></div>
+            <p class="cuerpo">Eliges un área y te desplazas tú, o pulsas <b>Auto</b> y baja sola. Destello une cada cuadro en unos 0.6&nbsp;ms y ves la página crecer en la miniatura. Los encabezados y pies fijos salen una sola vez.</p>
+          </div>
+        </div>
+        <div class="fn-item">
+          <h3><button class="fn-nombre" type="button" aria-expanded="false">Grabar y GIF</button></h3>
+          <div class="det marco">
+            <div class="demo" aria-hidden="true"><div class="esc e-grabar"><i class="d-zona"></i><i class="b" style="left:70px;top:34px;width:110px"></i><i class="b" style="left:70px;top:58px;width:150px"></i><i class="b" style="left:70px;top:82px;width:80px"></i><i class="d-anillo a1"></i><i class="d-anillo a2"></i><span class="d-cap"><i></i>00:06</span></div></div>
+            <p class="cuerpo">MP4 a <b>60&nbsp;fps</b> en H.264 o HEVC, con audio del sistema y micrófono. Cada clic deja un anillo y tus atajos aparecen en pantalla. Al terminar, un codificador propio convierte 8&nbsp;s de video en GIF en unos 30&nbsp;ms.</p>
+          </div>
+        </div>
+        <div class="fn-item">
+          <h3><button class="fn-nombre" type="button" aria-expanded="false">Arrastrar</button></h3>
+          <div class="det marco">
+            <div class="demo" aria-hidden="true"><div class="esc e-arrastrar"><i class="d-origen"></i><i class="d-dest"></i><i class="b" style="left:190px;top:36px;width:70px"></i><i class="b" style="left:190px;top:54px;width:84px"></i><span class="d-qa"><i></i></span></div></div>
+            <p class="cuerpo">Al soltar aparece la vista rápida: Copiar, Guardar, Anotar o Fijar. <b>Arrastra la miniatura</b> a Slack, Figma o un reporte, sin buscar el archivo. Varias capturas seguidas se apilan en la esquina.</p>
+          </div>
+        </div>
       </div>
-      <div class="pestanas" role="tablist" aria-label="Funciones de Destello"></div>
-      <div class="marco escaparate-marco" id="panel" role="tabpanel">
-        <video id="demo" muted playsinline preload="none"></video>
-      </div>
-      <ul class="detalle" id="detalle" aria-live="polite"></ul>
     </div>
   </section>
 
-  <section class="velocidad" id="velocidad">
-    <div class="wrap"><div class="panel">
-      <div class="cabeza">
-        <h2>Más rápida que un parpadeo.</h2>
-        <p>Un parpadeo dura unos 300&nbsp;ms. Del clic al portapapeles, Destello tarda unos <b>10</b>.</p>
-      </div>
+  <section id="velocidad">
+    <div class="wrap">
+      <h2>Medido, no prometido.</h2>
+      <p class="entrada">Un parpadeo dura unos 300&nbsp;ms. Estos son los tiempos de Destello en una Mac con M5 y monitor 5K.</p>
+      <ul class="cifras">
+        <li class="marco"><b>0.7</b><span>ms · del atajo al selector</span></li>
+        <li class="marco"><b>6</b><span>ms · del clic a la vista rápida</span></li>
+        <li class="marco"><b>10</b><span>ms · PNG en el portapapeles</span></li>
+      </ul>
       <div class="carrera" id="carrera">
-        <div class="carril parpadeo"><span>Un parpadeo</span><div class="pista"><i></i></div><output class="num">300 ms</output></div>
-        <div class="carril destello"><span>Destello</span><div class="pista"><i></i></div><output class="num">10 ms</output></div>
+        <div class="carril parpadeo"><span>Un parpadeo</span><div class="pista-c"><i></i></div><output class="num">300 ms</output></div>
+        <div class="carril destello"><span>Destello</span><div class="pista-c"><i></i></div><output class="num">10 ms</output></div>
         <footer>
           <span>La pantalla se congela al abrir el selector y el PNG se comprime con todos los núcleos de tu Mac.</span>
-          <button type="button" id="otra-vez">Otra vez</button>
+          <button class="btn linea" type="button" id="otra-vez">Otra vez</button>
         </footer>
       </div>
-      <ul class="tramos" aria-label="Tiempos medidos en una Mac con M5">
-        <li>Atajo → selector <b class="num">0.7–2 ms</b></li>
-        <li>Clic → vista rápida <b class="num">~6 ms</b></li>
-        <li>Clic → PNG en el portapapeles <b class="num">~10 ms</b></li>
-      </ul>
-    </div></div>
+    </div>
   </section>
 
-  <section class="nativa">
-    <div class="wrap cuerpo">
-      <div class="escritorio" aria-hidden="true">
-        <div class="menubar">
-          <span style="font-weight:700">Finder</span><span>Archivo</span><span>Edición</span><span>Ver</span>
-          <div class="der">
-            <span><svg><use href="#i-destello"/></svg></span>
-            <span class="num">Jue 9:41</span>
-          </div>
+  <section id="nativa">
+    <div class="wrap">
+      <div class="menubar marco" aria-hidden="true">
+        <b>Finder</b><span>Archivo</span><span>Edición</span><span class="lejos">Visualización</span><span class="lejos">Ir</span><span class="lejos">Ventana</span><span class="lejos">Ayuda</span>
+        <div class="der"><span class="mb-ico"><svg><use href="#i-destello"/></svg></span><span class="num">Jue 9:41</span></div>
+      </div>
+      <div class="dos">
+        <div>
+          <h2>Vive en tu barra de menús.</h2>
+          <p class="entrada">Nativa para macOS y escrita en Rust: <b style="color:var(--tinta)">2.1&nbsp;MB</b>, sin Electron ni navegador escondido. No ocupa el Dock y ya está lista cuando la llamas.</p>
+          <ul class="chips"><li>AppKit</li><li>ScreenCaptureKit</li><li>Vision</li><li>Apple Silicon</li><li>macOS 15+</li></ul>
         </div>
-        <ul class="menu">
-          <li class="sel"><span>Capturar área</span><span>⌥⇧⌘4</span></li>
+        <ul class="menu" id="menu" aria-hidden="true">
+          <li class="sel" id="menu-capturar"><span>Capturar área</span><span>⌥⇧⌘4</span></li>
           <li><span>Capturar pantalla completa</span><span>⌥⇧⌘3</span></li>
           <li><span>Capturar ventana</span><span>⌥⇧⌘6</span></li>
           <li><span>Repetir área anterior</span><span>⌥⇧⌘8</span></li>
@@ -433,34 +568,18 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
           <hr>
           <li><span>Fijar última captura</span><span>⌥⇧⌘P</span></li>
           <li><span>Anotar última captura</span><span>⌥⇧⌘E</span></li>
-          <li><span>Desbloquear capturas fijadas</span><span></span></li>
-          <li><span>Cerrar capturas fijadas</span><span></span></li>
           <hr>
-          <li><span>Ocultar íconos del escritorio</span><span></span></li>
-          <li><span>Abrir al iniciar sesión</span><span></span></li>
-          <hr>
-          <li><span>Abrir carpeta de capturas</span><span></span></li>
           <li><span>Preferencias…</span><span>⌘,</span></li>
-          <li><span>Buscar actualizaciones…</span><span></span></li>
-        </ul>
-      </div>
-      <div class="texto">
-        <h2>Vive en tu barra de menús.</h2>
-        <p>Nativa para macOS y escrita en Rust: <b>2.1&nbsp;MB</b>, sin Electron ni navegador escondido. No ocupa el Dock y ya está lista cuando la llamas.</p>
-        <ul class="chips">
-          <li>AppKit</li><li>ScreenCaptureKit</li><li>Vision</li><li>Apple Silicon</li><li>macOS 15+</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section class="privada">
+  <section id="privada">
     <div class="wrap">
-      <div class="cabeza">
-        <h2>Tus capturas no salen de tu Mac.</h2>
-        <p>Sin cuenta, sin nube y sin telemetría. Del atajo al archivo, <b>todo pasa en tu Mac</b>.</p>
-      </div>
-      <figure class="tu-mac" id="tu-mac">
+      <h2>Tus capturas no salen de tu Mac.</h2>
+      <p class="entrada">Sin cuenta, sin nube y sin telemetría. Del atajo al archivo, todo pasa en tu Mac.</p>
+      <figure class="tu-mac marco" id="tu-mac">
         <figcaption class="rotulo"><svg class="ico" aria-hidden="true"><use href="#i-mac"/></svg>Tu Mac</figcaption>
         <ol class="flujo">
           <li class="paso">
@@ -468,31 +587,28 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
             <span class="nota" id="atajo-nota" aria-live="polite">Tu atajo · haz clic para cambiarlo</span>
           </li>
           <li class="hilo" aria-hidden="true"><i></i></li>
-          <li class="paso"><img class="recorte" src="media/privada-clabe.jpg" alt="Recorte de una factura con los datos para transferir y una CLABE" width="210" height="80" loading="lazy"><span class="nota">Captura</span></li>
+          <li class="paso"><div class="recorte" id="recorte" role="img" aria-label="Una captura"><i class="r-hoja"></i><i class="r-b" style="top:34px;width:120px"></i><i class="r-b" style="top:56px;width:164px"></i><i class="r-b" style="top:78px;width:88px"></i></div><span class="nota" id="recorte-nota">Captura</span></li>
           <li class="hilo" aria-hidden="true"><i></i></li>
           <li><ul class="destinos">
             <li><svg class="ico" aria-hidden="true"><use href="#i-portapapeles"/></svg><b>Portapapeles</b>listo para pegar</li>
-            <li><svg class="ico" aria-hidden="true"><use href="#i-carpeta"/></svg><span class="num">Destello 2026-10-09 a las 09.41.12.png</span></li>
-            <li><svg class="ico" aria-hidden="true"><use href="#i-texto"/></svg><b>Texto</b><span class="num">012180001234567899</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-carpeta"/></svg><span class="num" id="destino-archivo">Destello 2026-10-09 a las 09.41.12.png</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-texto"/></svg><b>Texto</b>si lo pides</li>
           </ul></li>
         </ol>
       </figure>
       <div class="salida">
-        <span class="linea" aria-hidden="true"></span>
-        <span class="externo"><svg class="ico" aria-hidden="true"><use href="#i-red"/></svg>destello.app</span>
+        <span class="cable" aria-hidden="true"><i></i></span>
+        <span class="fuera">destello.app</span>
         <p><b>Lo único que sale:</b> una vez al día, Destello pregunta si hay una versión nueva. No envía capturas, texto ni datos de uso.</p>
       </div>
     </div>
   </section>
 
-  <section class="precio" id="precio">
+  <section id="precio">
     <div class="wrap">
-      <div class="cabeza">
-        <h2>Gratis durante la beta.</h2>
-        <p>Todas las funciones, sin registro. Cuando salga la 1.0 costará un solo pago.</p>
-      </div>
-      <div class="plan-borde"><div class="plan">
-        <p class="nombre">Beta pública</p>
+      <h2>Gratis durante la beta.</h2>
+      <p class="entrada">Todas las funciones, sin registro. Cuando salga la 1.0 costará un solo pago.</p>
+      <div class="plan marco">
         <p class="cifra"><b class="num">$0</b><span>ahora</span></p>
         <p class="despues">Después, <b>$19 USD pago único</b>. Sin suscripción.</p>
         <ul>
@@ -503,182 +619,397 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
         </ul>
         <a class="btn" href="downloads/Destello.dmg" data-umami-event="Descarga" data-umami-event-lugar="precio"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar gratis</a>
         <p class="meta">Versión 0.1.0 · 2.1 MB · macOS 15 o posterior · Apple Silicon</p>
-      </div></div>
+      </div>
     </div>
   </section>
 
   <section id="preguntas">
     <div class="wrap">
-      <div class="cabeza">
-        <h2>Preguntas frecuentes.</h2>
-      </div>
+      <h2>Preguntas frecuentes.</h2>
       <div class="preguntas">
-        <details>
-          <summary data-umami-event="Pregunta" data-umami-event-tema="requisitos">¿Qué necesito para usar Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
-          <p>Una Mac con Apple Silicon y macOS 15 Sequoia o posterior. La primera vez, macOS te pide el permiso de Grabación de pantalla; Destello te guía paso a paso.</p>
-        </details>
-        <details>
-          <summary data-umami-event="Pregunta" data-umami-event-tema="gratis">¿De verdad es gratis?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
-          <p>Sí. Durante la beta pública tienes todas las funciones sin pagar ni registrarte. Al salir la 1.0 costará $19 USD en un solo pago.</p>
-        </details>
-        <details>
-          <summary data-umami-event="Pregunta" data-umami-event-tema="privacidad">¿Mis capturas se suben a algún lado?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
-          <p>No. No hay cuenta ni nube: tus capturas se guardan como PNG en la carpeta que elijas. La única conexión es para revisar si hay una versión nueva.</p>
-        </details>
-        <details>
-          <summary data-umami-event="Pregunta" data-umami-event-tema="gatekeeper">macOS dice que no puede verificar la app. ¿Qué hago?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
-          <p>Mientras la beta no esté notarizada, ábrela la primera vez con clic derecho → Abrir. Después abre normal.</p>
-        </details>
-        <details>
-          <summary data-umami-event="Pregunta" data-umami-event-tema="atajo">¿Puedo usar ⇧⌘4 para capturar con Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
-          <p>Sí. Desactiva los atajos de capturas de macOS en Ajustes del Sistema y asígnalos en las Preferencias de Destello. Todos los atajos se pueden cambiar.</p>
-        </details>
-        <details>
-          <summary data-umami-event="Pregunta" data-umami-event-tema="rapidez">¿Por qué es tan rápida?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
-          <p>Está escrita en Rust sobre AppKit, ScreenCaptureKit y Vision. Las ventanas del selector se preparan al arrancar, la pantalla se congela mientras eliges y el PNG se comprime usando todos los núcleos a la vez.</p>
-        </details>
+        <details><summary data-umami-event="Pregunta" data-umami-event-tema="requisitos">¿Qué necesito para usar Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Una Mac con Apple Silicon y macOS 15 Sequoia o posterior. La primera vez, macOS te pide el permiso de Grabación de pantalla; Destello te guía paso a paso.</p></details>
+        <details><summary data-umami-event="Pregunta" data-umami-event-tema="gratis">¿De verdad es gratis?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Sí. Durante la beta pública tienes todas las funciones sin pagar ni registrarte. Al salir la 1.0 costará $19 USD en un solo pago.</p></details>
+        <details><summary data-umami-event="Pregunta" data-umami-event-tema="privacidad">¿Mis capturas se suben a algún lado?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>No. No hay cuenta ni nube: tus capturas se guardan como PNG en la carpeta que elijas. La única conexión es para revisar si hay una versión nueva.</p></details>
+        <details><summary data-umami-event="Pregunta" data-umami-event-tema="gatekeeper">macOS dice que no puede verificar la app. ¿Qué hago?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Mientras la beta no esté notarizada, ábrela la primera vez con clic derecho → Abrir. Después abre normal.</p></details>
+        <details><summary data-umami-event="Pregunta" data-umami-event-tema="atajo">¿Puedo usar ⇧⌘4 para capturar con Destello?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Sí. Desactiva los atajos de capturas de macOS en Ajustes del Sistema y asígnalos en las Preferencias de Destello. Todos los atajos se pueden cambiar.</p></details>
+        <details><summary data-umami-event="Pregunta" data-umami-event-tema="rapidez">¿Por qué es tan rápida?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>Está escrita en Rust sobre AppKit, ScreenCaptureKit y Vision. Las ventanas del selector se preparan al arrancar, la pantalla se congela mientras eliges y el PNG se comprime usando todos los núcleos a la vez.</p></details>
+        <details><summary data-umami-event="Pregunta" data-umami-event-tema="demo">¿Lo que probé en esta página es la app?<svg class="ico" aria-hidden="true"><use href="#i-mas"/></svg></summary>
+          <p>No: es una recreación en tu navegador para que sientas el flujo. En tu Mac, Destello captura cualquier pantalla y los tiempos son los medidos arriba.</p></details>
       </div>
     </div>
   </section>
 
   <section class="cierre">
-    <div class="aurora" aria-hidden="true"></div>
     <div class="wrap">
-      <img src="assets/icon-256.png" alt="" width="96" height="96">
-      <h2>Tu próxima captura, antes de que parpadees.</h2>
-      <div class="acciones">
-        <a class="btn" href="downloads/Destello.dmg" data-umami-event="Descarga" data-umami-event-lugar="cierre"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar gratis para Mac</a>
+      <div class="marco">
+        <h2>Tu próxima captura, antes de que parpadees.</h2>
+        <div class="cta">
+          <a class="btn" href="downloads/Destello.dmg" data-umami-event="Descarga" data-umami-event-lugar="cierre"><svg class="ico" aria-hidden="true"><use href="#i-bajar"/></svg>Descargar gratis para Mac</a>
+          <span class="req">Versión 0.1.0 · 2.1&nbsp;MB · macOS 15 o posterior</span>
+        </div>
       </div>
-      <p class="requisitos">Versión 0.1.0 · 2.1 MB · macOS 15 o posterior</p>
     </div>
   </section>
 </main>
 
-<footer class="pie">
-  <div class="wrap">
-    <span>Destello · Hecho en México con Rust · © 2026</span>
-  </div>
-</footer>
+<footer class="pie"><div class="wrap">Destello · Hecho en México con Rust · © 2026</div></footer>
+</div>
 
+<!-- La demo: fuera de .pagina para que no salga en las capturas. Nada de esto se ve hasta que el visitante la abre. -->
+<div class="pila" id="pila"></div>
+<div class="aviso" id="aviso" role="status" hidden></div>
+<div class="selector" id="selector" hidden>
+  <svg aria-hidden="true"><path class="sombra" id="s-sombra"/><line class="guia" id="s-gx"/><line class="guia" id="s-gy"/><rect class="caja" id="s-caja" hidden/></svg>
+  <div class="lupa" id="s-lupa" aria-hidden="true"></div>
+  <span class="etq" id="s-coord" hidden></span><span class="etq" id="s-tam" hidden></span>
+</div>
+<div class="ed-fondo" id="ed-fondo" hidden>
+  <div class="ed" role="dialog" aria-label="Destello — Anotar">
+    <div class="tit"><button class="luz" type="button" id="ed-cerrar" aria-label="Cerrar el editor"></button><i class="luz"></i><i class="luz"></i><span>Destello — Anotar</span></div>
+    <div class="herr" id="ed-herr">
+      <div class="seg" role="group" aria-label="Herramientas">
+        <button type="button" data-h="flecha" aria-pressed="true" aria-label="Flecha"><svg aria-hidden="true"><use href="#i-flecha"/></svg></button>
+        <button type="button" data-h="rect" aria-pressed="false" aria-label="Rectángulo"><svg aria-hidden="true"><use href="#i-rect"/></svg></button>
+        <button type="button" data-h="res" aria-pressed="false" aria-label="Resaltador"><svg aria-hidden="true"><use href="#i-res"/></svg></button>
+        <button type="button" data-h="num" aria-pressed="false" aria-label="Contador"><svg aria-hidden="true"><use href="#i-uno"/></svg></button>
+      </div>
+      <div class="seg col" role="group" aria-label="Color">
+        <button type="button" data-c="#ff3b30" aria-pressed="true" aria-label="Rojo"><b style="--c:#ff3b30"></b></button>
+        <button type="button" data-c="#ffcc00" aria-pressed="false" aria-label="Amarillo"><b style="--c:#ffcc00"></b></button>
+        <button type="button" data-c="#007aff" aria-pressed="false" aria-label="Azul"><b style="--c:#007aff"></b></button>
+        <button type="button" data-c="#1c1c1e" aria-pressed="false" aria-label="Negro"><b style="--c:#1c1c1e"></b></button>
+      </div>
+      <div class="seg"><button type="button" id="ed-deshacer" aria-label="Deshacer" disabled><svg aria-hidden="true"><use href="#i-deshacer"/></svg></button></div>
+    </div>
+    <div class="lienzo" id="ed-lienzo"></div>
+    <div class="pie-ed">
+      <span class="tam" id="ed-tam"></span>
+      <button class="bt" type="button" id="ed-guardar"><svg aria-hidden="true"><use href="#i-bajar"/></svg>Guardar</button>
+      <button class="bt acc" type="button" id="ed-copiar"><svg aria-hidden="true"><use href="#i-copiar"/></svg>Copiar</button>
+    </div>
+  </div>
+</div>
 <script>
 (() => {
+  const $ = id => document.getElementById(id);
+  const NS = 'http://www.w3.org/2000/svg';
   const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const M = 'media/funciones-marca/';
+  const tactil = matchMedia('(hover: none)').matches;
+  const pagina = $('pagina'), pila = $('pila'), avisoEl = $('aviso');
+  const limite = (v, a, b) => Math.min(b, Math.max(a, v));
+  const attrs = (el, o) => { for (const k in o) el.setAttribute(k, o[k]); return el; };
+  // `hidden` como atributo: los elementos SVG no tienen la propiedad.
+  const ver = (si, ...els) => els.forEach(el => el.toggleAttribute('hidden', !si));
+  const usar = accion => window.umami?.track('Demo', { accion });
+  const caja4 = (a, b) => ({ x: Math.min(a[0], b[0]), y: Math.min(a[1], b[1]), w: Math.abs(b[0] - a[0]), h: Math.abs(b[1] - a[1]) });
+  // Rectángulo de un elemento en px de la página (lo que entienden los espejos).
+  const enPagina = el => { const o = pagina.getBoundingClientRect(), r = el.getBoundingClientRect(); return { x: r.left - o.left, y: r.top - o.top, w: r.width, h: r.height }; };
 
-  // La barra gana su vidrio al desplazarse, y su botón el degradado cuando el del hero sale de la vista.
-  const barra = document.getElementById('barra');
-  const alDesplazar = () => barra.classList.toggle('scroll', scrollY > 8);
-  addEventListener('scroll', alDesplazar, { passive: true });
-  alDesplazar();
-  new IntersectionObserver(([e]) => barra.classList.toggle('cta', !e.isIntersecting), { rootMargin: '-64px 0px 0px' })
-    .observe(document.querySelector('.portada .acciones .btn'));
+  let tAviso = 0;
+  const decir = (texto, ms = 2600) => {
+    clearTimeout(tAviso); avisoEl.textContent = texto; avisoEl.hidden = false;
+    if (ms) tAviso = setTimeout(() => { avisoEl.hidden = true; }, ms);
+  };
 
-  // La toma del hero recibe un destello al cargar.
-  const tomaV = document.getElementById('toma-video');
-  if (quieto) { tomaV.removeAttribute('autoplay'); tomaV.removeAttribute('loop'); tomaV.pause(); }
-  else document.getElementById('toma').classList.add('destella');
+  // ── Portada: la selección abraza la palabra, con asas, marcas de corte y medida ──
+  const hero = $('hero'), palabra = $('palabra');
+  const asas = [...Array(8)].map(() => $('h-asas').appendChild(attrs(document.createElementNS(NS, 'rect'), { class: 'asa', width: 9, height: 9 })));
+  const heroSel = $('hero-sel'), cursorH = $('h-cursor'), chispa = $('h-chispa');
+  let caja = null, trazando = false;
+  // Dibuja la selección hasta la fracción p (1 = completa): recuadro, asas, marcas de corte, medida y cursor.
+  function dibujar(p) {
+    const R = caja, r = { x: R.x, y: R.y, w: R.w * p, h: R.h * p }, x2 = r.x + r.w, y2 = r.y + r.h, c = 10, l = 30;
+    attrs($('h-hoyo'), { x: r.x, y: r.y, width: r.w, height: r.h }); attrs($('h-borde'), { x: r.x, y: r.y, width: r.w, height: r.h });
+    [[0, 0], [.5, 0], [1, 0], [0, .5], [1, .5], [0, 1], [.5, 1], [1, 1]].forEach(([fx, fy], i) => attrs(asas[i], { x: r.x + r.w * fx - 4.5, y: r.y + r.h * fy - 4.5 }));
+    // Marcas de corte: dos trazos cortos por esquina, separados 10 px de la selección
+    $('h-corte').setAttribute('d', [[r.x, r.y, -1, -1], [x2, r.y, 1, -1], [r.x, y2, -1, 1], [x2, y2, 1, 1]].map(([x, y, dx, dy]) => `M${x + dx * c} ${y}h${dx * l}M${x} ${y + dy * c}v${dy * l}`).join(''));
+    $('h-medida').textContent = `${Math.round(r.w)} × ${Math.round(r.h)}`;
+    $('h-medida').style.transform = `translate(${x2 - $('h-medida').offsetWidth}px, ${y2 + 14}px)`;
+    cursorH.style.transform = `translate(${x2}px, ${y2}px)`;
+    palabra.style.setProperty('--p', p);
+  }
+  function seleccionar() {
+    // La palabra llena su caja de borde a borde; de ahí salen la selección y sus marcas.
+    const ancho = palabra.parentElement.clientWidth, real = palabra.getBoundingClientRect().width;
+    if (real && Math.abs(ancho / real - 1) > .002) palabra.style.fontSize = parseFloat(getComputedStyle(palabra).fontSize) * ancho / real + 'px';
+    const h = hero.getBoundingClientRect(), p = palabra.getBoundingClientRect();
+    caja = { x: p.left - h.left, y: p.top - h.top, w: p.width, h: p.height };
+    if (!trazando) dibujar(1);
+  }
+  // El momento de la portada: el cursor arrastra la selección de esquina a esquina y, al soltar, salta el destello.
+  function trazar() {
+    if (quieto || trazando || !caja) return;
+    trazando = true;
+    palabra.classList.add('trazando'); palabra.classList.remove('destello'); heroSel.classList.add('trazando'); chispa.classList.remove('salta');
+    ver(true, cursorH); dibujar(0);
+    const t0 = performance.now();
+    const paso = ahora => {
+      const t = limite((ahora - t0 - 380) / 820, 0, 1);
+      dibujar(t < .5 ? 4 * t * t * t : 1 - Math.pow(2 - 2 * t, 3) / 2);
+      if (t < 1) return requestAnimationFrame(paso);
+      trazando = false;
+      palabra.classList.remove('trazando'); heroSel.classList.remove('trazando'); ver(false, cursorH);
+      void palabra.offsetWidth; palabra.classList.add('destello');
+      chispa.style.translate = `${caja.x + caja.w}px ${caja.y}px`; chispa.classList.add('salta');
+    };
+    requestAnimationFrame(paso);
+  }
+  palabra.addEventListener('click', trazar);
+  new ResizeObserver(seleccionar).observe(hero);
+  // El encabezado gana su línea de tinta al desplazarse
+  const barra = $('barra'), alBajar = () => barra.classList.toggle('scroll', scrollY > 8);
+  addEventListener('scroll', alBajar, { passive: true }); alBajar();
 
-  // Escaparate: cada pestaña reproduce su video real y, al terminar, pasa a la siguiente.
-  const funciones = [
-    { id: 'capturar', nombre: 'Capturar', video: 'area', puntos: [
-      ['Área, ventana o pantalla', 'Espacio alterna entre área y ventana; Intro captura la pantalla completa.'],
-      ['Lupa 8× y medidas', 'Guías en cruz y el tamaño exacto en píxeles mientras eliges.'],
-      ['Barra de modos', 'Área, Pantalla, Ventana, Desplazamiento, Temporizador, Texto o Grabar, con las teclas 1 a 7.'] ] },
-    { id: 'anotar', nombre: 'Anotar', video: 'anotar', puntos: [
-      ['Flechas y formas', 'Flecha, rectángulo, elipse, línea, texto y lápiz, cada una con su tecla.'],
-      ['Pixela y desenfoca', 'Tapa correos, tarjetas y nombres antes de compartir.'],
-      ['Contadores y foco', 'Numera los pasos y oscurece lo que no importa.'] ] },
-    { id: 'texto', nombre: 'Copiar texto', video: 'texto', puntos: [
-      ['De cualquier imagen', 'Videos, PDFs escaneados o apps que no te dejan copiar.'],
-      ['Se lee en tu Mac', 'Vision reconoce español e inglés, con acentos y ñ.'],
-      ['También códigos QR', 'Y el texto está en tu portapapeles en unos 85 ms.'] ] },
-    { id: 'fijar', nombre: 'Fijar', video: 'fijar', puntos: [
-      ['Siempre encima', 'Deja un diseño o unas medidas flotando sobre tus ventanas.'],
-      ['Rueda y números', 'Tamaño con la rueda o pellizco; opacidad del 10 al 100 % con 1 a 9.'],
-      ['Modo bloqueado', 'Los clics pasan a través de la captura fijada.'] ] },
-    { id: 'pagina', nombre: 'Página completa', video: 'pagina', puntos: [
-      ['Te desplazas tú, o Auto', 'Destello une cada cuadro mientras bajas, o baja solo.'],
-      ['Sin costuras', 'Encabezados y pies fijos salen una sola vez.'],
-      ['Miniatura en vivo', 'Ves la página crecer; cada cuadro se une en ~0.6 ms.'] ] },
-    { id: 'grabar', nombre: 'Grabar y GIF', video: 'gif', puntos: [
-      ['MP4 a 60 fps', 'H.264 o HEVC, con audio del sistema y micrófono.'],
-      ['Clics y teclas', 'Anillos en cada clic y tus atajos en pantalla.'],
-      ['GIF al instante', 'Un codificador propio convierte 8 s de video en ~30 ms.'] ] },
-    { id: 'arrastrar', nombre: 'Arrastrar', video: 'pegar', puntos: [
-      ['Vista rápida', 'Copiar, Guardar, Anotar o Fijar en cuanto sueltas.'],
-      ['Arrastra a cualquier app', 'Suelta la miniatura en Slack, Figma o un reporte, sin buscar el archivo.'],
-      ['Se apilan', 'Varias capturas seguidas esperan su turno en la esquina.'] ] },
-  ];
-  const lista = document.querySelector('.pestanas');
-  const demo = document.getElementById('demo');
-  const detalle = document.getElementById('detalle');
-  const panel = document.getElementById('panel');
-  let actual = -1, visible = false;
+  // ── Espejos: un clon inerte de la página, encuadrado en un rectángulo. Así se «captura» sin rasterizar. ──
+  function clonar() {
+    const c = pagina.cloneNode(true);
+    c.removeAttribute('id'); c.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+    // Los espejos de dentro se vacían: un clon no vuelve a clonar la página.
+    c.querySelectorAll('.espejo').forEach(n => n.replaceChildren());
+    c.inert = true; c.setAttribute('aria-hidden', 'true');
+    c.style.width = pagina.offsetWidth + 'px';
+    return c;
+  }
+  function espejo(r, ancho, alto, marcas) {
+    const caja = document.createElement('div'), c = clonar(), k = Math.max(ancho / r.w, alto / r.h);
+    caja.className = 'espejo'; caja.style.cssText = `width:${ancho}px;height:${alto}px`;
+    c.style.transform = `translate(${(ancho - r.w * k) / 2}px,${(alto - r.h * k) / 2}px) scale(${k}) translate(${-r.x}px,${-r.y}px)`;
+    caja.append(c);
+    if (marcas) { const m = attrs(document.createElementNS(NS, 'svg'), { class: 'marcas', viewBox: `0 0 ${r.w} ${r.h}`, preserveAspectRatio: 'xMidYMid slice' }); m.innerHTML = marcas; caja.append(m); }
+    return caja;
+  }
 
-  const botones = funciones.map((f, i) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.role = 'tab'; b.id = 'tab-' + f.id; b.textContent = f.nombre;
-    b.setAttribute('aria-controls', 'panel');
-    b.addEventListener('click', () => elegir(i));
-    b.addEventListener('keydown', e => {
-      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (d) { e.preventDefault(); const n = (i + d + funciones.length) % funciones.length; elegir(n); botones[n].focus(); }
-    });
-    lista.append(b);
-    return b;
+  // PNG real: el espejo se serializa dentro de un SVG con la hoja de estilos y la fuente incrustadas.
+  let recursos = null;
+  const comoDato = async url => { const b = await (await fetch(url)).blob(); return new Promise(ok => { const f = new FileReader(); f.onload = () => ok(f.result); f.readAsDataURL(b); }); };
+  async function aPNG(cap) {
+    recursos ||= Promise.all([comoDato('fonts/archivo.woff2'), comoDato('assets/icon-64.png')]);
+    const [fuente, icono] = await recursos, w = Math.round(cap.r.w), h = Math.round(cap.r.h), e = espejo(cap.r, w, h, cap.marcas), xs = new XMLSerializer();
+    e.querySelectorAll('img').forEach(i => { i.src = icono; });
+    const css = $('estilos').textContent.replace('url(fonts/archivo.woff2)', `url(${fuente})`);
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w * 2}" height="${h * 2}" viewBox="0 0 ${w} ${h}"><foreignObject width="${w}" height="${h}"><div xmlns="http://www.w3.org/1999/xhtml"><style><![CDATA[${css}]]></style>${xs.serializeToString(document.querySelector('body > svg'))}${xs.serializeToString(e)}</div></foreignObject></svg>`;
+    const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); await img.decode();
+    const c = Object.assign(document.createElement('canvas'), { width: w * 2, height: h * 2 });
+    c.getContext('2d').drawImage(img, 0, 0, w * 2, h * 2);
+    return new Promise((ok, no) => c.toBlob(b => b ? ok(b) : no(new Error('sin imagen')), 'image/png'));
+  }
+  const sinExportar = () => decir('Este navegador no deja exportar la imagen. En tu Mac, Destello la copia de verdad.', 4200);
+  function copiar(cap) {
+    try { navigator.clipboard.write([new ClipboardItem({ 'image/png': aPNG(cap) })]).then(() => decir('Copiada. Pégala donde quieras con ⌘V', 3200), sinExportar); } catch { sinExportar(); }
+    usar('copiar');
+  }
+  function guardar(cap) {
+    aPNG(cap).then(b => {
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(b), download: cap.nombre });
+      a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); decir('Guardada en tus descargas');
+    }, sinExportar);
+    usar('guardar');
+  }
+
+  // ── Capturas y vista rápida ──
+  const nombrar = () => { const d = new Date(), p = n => String(n).padStart(2, '0');
+    return `Destello ${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} a las ${p(d.getHours())}.${p(d.getMinutes())}.${p(d.getSeconds())}.png`; };
+  const anchoQA = () => innerWidth < 640 ? 200 : 232;
+  const ajustarPila = () => { const max = innerWidth < 640 ? 1 : innerHeight > 760 ? 3 : 2; while (pila.children.length > max) pila.firstElementChild.remove(); };
+  const recorte = $('recorte');
+  function alRecorte(cap, propia) {
+    recorte.replaceChildren(espejo(cap.r, recorte.clientWidth || 280, recorte.clientHeight || 121, cap.marcas));
+    if (propia) { $('recorte-nota').textContent = 'Tu captura'; $('destino-archivo').textContent = cap.nombre; recorrer(); }
+  }
+  function miniatura(cap) {
+    const an = anchoQA(), al = limite(an * cap.r.h / cap.r.w, 96, 170);
+    cap.q.style.height = al + 'px';
+    cap.q.querySelector('.espejo')?.remove(); cap.q.prepend(espejo(cap.r, an, al, cap.marcas));
+    alRecorte(cap, true);
+  }
+  const ACCIONES = { copiar, guardar, cerrar: c => { c.q.remove(); c.q = null; }, anotar: c => anotar(c), fijar: c => fijar(c) };
+  function capturar(r) {
+    const q = document.createElement('div'), cap = { r, q, marcas: '', formas: [], nombre: nombrar() };
+    q.className = 'qa nueva';
+    q.innerHTML = `<div class="ctl"><div class="mid"><button type="button" data-a="copiar">Copiar</button><button type="button" data-a="guardar">Guardar</button></div>
+      <button class="cb tl" type="button" data-a="cerrar" aria-label="Cerrar"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+      <button class="cb tr" type="button" data-a="anotar" aria-label="Anotar"><svg aria-hidden="true"><use href="#i-lapiz"/></svg></button>
+      <button class="cb br" type="button" data-a="fijar" aria-label="Fijar"><svg aria-hidden="true"><use href="#i-pin"/></svg></button></div>`;
+    q.addEventListener('click', e => { const a = e.target.closest('[data-a]'); if (a) ACCIONES[a.dataset.a](cap); });
+    miniatura(cap); pila.append(q); ajustarPila();
+    setTimeout(() => q.classList.remove('nueva'), 4000);
+    decir(`Captura lista · ${Math.round(r.w * 2)} × ${Math.round(r.h * 2)} px`); usar('capturar');
+    return cap;
+  }
+
+  // ── Selector: cubre la ventana como en la app. Solo se abre si el visitante lo pide: con ⌥⇧⌘4 o con el enlace de la portada. ──
+  const sel = $('selector'), sSombra = $('s-sombra'), sGx = $('s-gx'), sGy = $('s-gy'), sCaja = $('s-caja'), sTam = $('s-tam'), sCoord = $('s-coord'), lupa = $('s-lupa');
+  let inicio = null, lupaClon = null;
+  const velar = r => sSombra.setAttribute('d', `M0 0H${innerWidth}V${innerHeight}H0Z` + (r ? `M${r.x} ${r.y}h${r.w}v${r.h}h${-r.w}Z` : ''));
+  const mover = (el, x, y, centrar) => { el.style.transform = `translate(${x}px, ${y}px)` + (centrar ? ' translateX(-50%)' : ''); };
+  function abrir() {
+    sel.hidden = false; velar(null); ver(false, sGx, sGy, sCaja, sTam, sCoord, lupa);
+    decir(tactil ? 'Arrastra para capturar un área' : 'Arrastra para capturar un área · Esc para salir', 0);
+    if (!tactil) { lupaClon = clonar(); lupaClon.style.cssText += ';position:absolute;left:0;top:0;transform-origin:0 0'; lupa.replaceChildren(lupaClon); }
+    usar('abrir');
+  }
+  function cerrar() { sel.hidden = true; inicio = null; lupa.replaceChildren(); lupaClon = null; avisoEl.hidden = true; }
+  sel.addEventListener('pointerdown', e => { if (e.button) return; inicio = [e.clientX, e.clientY]; try { sel.setPointerCapture(e.pointerId); } catch {} });
+  sel.addEventListener('pointermove', e => {
+    const x = e.clientX, y = e.clientY;
+    if (inicio) {
+      const r = caja4(inicio, [x, y]);
+      velar(r); attrs(sCaja, { x: r.x + .5, y: r.y + .5, width: r.w, height: r.h }); ver(true, sCaja, sTam); ver(false, sGx, sGy, sCoord, lupa);
+      sTam.textContent = `${Math.round(r.w)} × ${Math.round(r.h)}`; mover(sTam, r.x + r.w / 2, r.y + r.h + 34 > innerHeight ? r.y + r.h - 30 : r.y + r.h + 8, true);
+      return;
+    }
+    if (e.pointerType === 'touch') return;
+    attrs(sGx, { x1: 0, x2: innerWidth, y1: y + .5, y2: y + .5 }); attrs(sGy, { x1: x + .5, x2: x + .5, y1: 0, y2: innerHeight });
+    ver(true, sGx, sGy, sCoord, lupa);
+    const o = pagina.getBoundingClientRect(), lx = x + 152 > innerWidth ? x - 148 : x + 20, ly = y + 178 > innerHeight ? y - 148 : y + 20;
+    if (lupaClon) lupaClon.style.transform = `translate(64px,64px) scale(4) translate(${o.left - x}px,${o.top - y}px)`;
+    mover(lupa, lx, ly); sCoord.textContent = `${Math.round(x)}, ${Math.round(y)}`; mover(sCoord, lx + 64, ly + 134, true);
+  });
+  sel.addEventListener('pointerup', e => {
+    if (!inicio) return;
+    const r = caja4(inicio, [e.clientX, e.clientY]), o = pagina.getBoundingClientRect();
+    inicio = null;
+    if (r.w < 8 || r.h < 8) { velar(null); ver(false, sCaja, sTam); return; }
+    cerrar();
+    capturar({ x: r.x - o.left, y: r.y - o.top, w: r.w, h: r.h });
+  });
+  sel.addEventListener('pointercancel', cerrar);
+  $('probar').addEventListener('click', abrir);
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape') { if (!sel.hidden) cerrar(); else if (!edFondo.hidden) cerrarEditor(); return; }
+    if (!edFondo.hidden) { if ((e.metaKey || e.ctrlKey) && e.key === 'z') { e.preventDefault(); deshacer(); } return; }
+    // El atajo de la app. e.code, porque con ⌥ macOS cambia el carácter.
+    if (e.altKey && e.shiftKey && e.metaKey && e.code === 'Digit4') { e.preventDefault(); abrir(); }
   });
 
-  function elegir(i) {
-    if (i === actual) return;
-    actual = i;
-    const f = funciones[i];
-    botones.forEach((b, j) => { b.setAttribute('aria-selected', j === i); b.tabIndex = j === i ? 0 : -1; b.style.setProperty('--p', 0); });
-    panel.setAttribute('aria-labelledby', botones[i].id);
-    demo.poster = M + f.video + '.jpg';
-    demo.src = M + f.video + '.mp4';
-    demo.setAttribute('aria-label', f.nombre + ': video de Destello en una Mac');
-    detalle.innerHTML = f.puntos.map(([t, d]) => `<li><b>${t}</b>${d}</li>`).join('');
-    if (visible && !quieto) demo.play().catch(() => {});
+  // ── Fijar: la captura flota sobre toda la página y se queda al desplazarse ──
+  function fijar(cap) {
+    const o = cap.q.getBoundingClientRect(), an = Math.min(cap.r.w, 440, innerWidth - 32), al = an * cap.r.h / cap.r.w, f = document.createElement('div');
+    f.className = 'fijada'; f.tabIndex = 0;
+    attrs(f, { role: 'group', 'aria-label': 'Captura fijada. Arrástrala; doble clic o Escape la cierra.' });
+    f.style.cssText = `left:${limite(o.left, 8, innerWidth - an - 8)}px;top:${limite(o.top, 12, Math.max(12, innerHeight - al - 100))}px`;
+    f.innerHTML = '<button type="button" aria-label="Cerrar la captura fijada"><svg aria-hidden="true"><use href="#i-x"/></svg></button>';
+    f.prepend(espejo(cap.r, an, al, cap.marcas)); document.body.append(f);
+    cap.q.remove(); cap.q = null;
+    let agarre = null;
+    const quitar = () => f.remove();
+    f.addEventListener('pointerdown', e => { if (e.target.closest('button')) return; const b = f.getBoundingClientRect(); try { f.setPointerCapture(e.pointerId); } catch {} agarre = [e.clientX - b.left, e.clientY - b.top]; });
+    f.addEventListener('pointermove', e => { if (agarre) { f.style.left = e.clientX - agarre[0] + 'px'; f.style.top = e.clientY - agarre[1] + 'px'; } });
+    f.addEventListener('pointerup', () => { agarre = null; });
+    f.addEventListener('dblclick', quitar);
+    f.addEventListener('keydown', e => { if (e.key === 'Escape') quitar(); });
+    f.querySelector('button').addEventListener('click', quitar);
+    decir('Fijada. Sigue bajando: se queda encima.', 3600); usar('fijar');
   }
-  // `timeupdate` solo llega unas 4 veces por segundo y la barra avanzaría a saltos; se pinta en cada cuadro mientras el video corre.
-  let cuadro = 0;
-  const avance = () => {
-    if (demo.duration) botones[actual].style.setProperty('--p', demo.currentTime / demo.duration);
-    cuadro = demo.paused || demo.ended ? 0 : requestAnimationFrame(avance);
-  };
-  demo.addEventListener('playing', () => { if (!cuadro) cuadro = requestAnimationFrame(avance); });
-  demo.addEventListener('ended', () => elegir((actual + 1) % funciones.length));
-  elegir(0);
-  new IntersectionObserver(([e]) => {
-    visible = e.isIntersecting;
-    if (visible && !quieto) { demo.preload = 'auto'; demo.play().catch(() => {}); } else demo.pause();
-  }, { threshold: .25 }).observe(panel);
 
-  // Carrera: el parpadeo tarda 300 ms reales; Destello, 10.
-  const carrera = document.getElementById('carrera');
-  const barras = carrera.querySelectorAll('.pista i');
+  // ── Editor: las marcas son SVG en px de la captura, así viajan con ella a la miniatura, a la fijada y al PNG ──
+  const edFondo = $('ed-fondo'), edLienzo = $('ed-lienzo');
+  let edCap = null, edSvg = null, edEsc = 1, formas = [], viva = null, herr = 'flecha', color = '#ff3b30';
+  function dibujo(f, n) {
+    const [a, b] = [f.a, f.b], r = caja4(a, b), g = f.g;
+    if (f.t === 'rect') return `<rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" rx="${g * .6}" fill="none" stroke="${f.c}" stroke-width="${g}"/>`;
+    if (f.t === 'res') return `<rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" rx="${g * .5}" fill="${f.c}" fill-opacity=".42"/>`;
+    if (f.t === 'num') return `<circle cx="${a[0]}" cy="${a[1]}" r="${g * 3.2}" fill="${f.c}"/><text x="${a[0]}" y="${a[1] + g * 1.25}" text-anchor="middle" fill="${f.c === '#ffcc00' ? '#1c1c1e' : '#fff'}" font-family="-apple-system, system-ui, sans-serif" font-weight="700" font-size="${g * 3.6}">${n}</text>`;
+    const ang = Math.atan2(b[1] - a[1], b[0] - a[0]), p = Math.min(g * 4.6, Math.hypot(b[0] - a[0], b[1] - a[1]) * .6), q = (d, s) => [b[0] - p * s * Math.cos(ang + d), b[1] - p * s * Math.sin(ang + d)];
+    return `<path d="M${a} L${q(0, .8)}" stroke="${f.c}" stroke-width="${g}" stroke-linecap="round" fill="none"/><path d="M${b} L${q(.48, 1)} L${q(-.48, 1)}Z" fill="${f.c}" stroke="${f.c}" stroke-width="${g * .3}" stroke-linejoin="round"/>`;
+  }
+  const marcasDe = lista => { let n = 0; return lista.map(f => dibujo(f, f.t === 'num' ? ++n : 0)).join(''); };
+  const pintarEditor = () => { edSvg.innerHTML = marcasDe(viva ? [...formas, viva] : formas); $('ed-deshacer').disabled = !formas.length; };
+  function anotar(cap) {
+    edCap = cap; formas = [...cap.formas]; viva = null; edFondo.hidden = false;
+    const r = cap.r; edEsc = Math.min((edLienzo.clientWidth - 32) / r.w, (edLienzo.clientHeight - 32) / r.h, 1.4);
+    const hoja = document.createElement('div');
+    hoja.className = 'hoja'; hoja.style.cssText = `width:${r.w * edEsc}px;height:${r.h * edEsc}px`;
+    edSvg = attrs(document.createElementNS(NS, 'svg'), { viewBox: `0 0 ${r.w} ${r.h}` });
+    hoja.append(espejo(r, r.w * edEsc, r.h * edEsc), edSvg); edLienzo.replaceChildren(hoja);
+    $('ed-tam').textContent = `${Math.round(r.w * 2)} × ${Math.round(r.h * 2)} px`;
+    const punto = e => { const b = hoja.getBoundingClientRect(); return [Math.round((e.clientX - b.left) / edEsc), Math.round((e.clientY - b.top) / edEsc)]; };
+    hoja.addEventListener('pointerdown', e => {
+      try { hoja.setPointerCapture(e.pointerId); } catch {}
+      const p = punto(e), f = { t: herr, a: p, b: p, c: color, g: +(4.5 / edEsc).toFixed(2) };
+      if (herr === 'num') formas.push(f); else viva = f;
+      pintarEditor();
+    });
+    hoja.addEventListener('pointermove', e => { if (viva) { viva.b = punto(e); pintarEditor(); } });
+    hoja.addEventListener('pointerup', () => { if (!viva) return; const f = viva; viva = null; if (Math.hypot(f.b[0] - f.a[0], f.b[1] - f.a[1]) > 6 / edEsc) formas.push(f); pintarEditor(); });
+    pintarEditor(); decir('Arrastra sobre la captura para dibujar', 3000);
+    $('ed-herr').querySelector('[aria-pressed="true"]').focus({ preventScroll: true });
+    usar('anotar');
+  }
+  const asentar = () => { edCap.formas = [...formas]; edCap.marcas = marcasDe(formas); };
+  function deshacer() { formas.pop(); pintarEditor(); }
+  function cerrarEditor() {
+    asentar(); edFondo.hidden = true; edLienzo.replaceChildren();
+    if (edCap.q) miniatura(edCap);
+  }
+  $('ed-herr').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const k = b.dataset.h ? 'h' : b.dataset.c ? 'c' : null;
+    if (!k) return deshacer();
+    if (k === 'h') herr = b.dataset.h; else color = b.dataset.c;
+    $('ed-herr').querySelectorAll(`[data-${k}]`).forEach(o => o.setAttribute('aria-pressed', o === b));
+  });
+  $('ed-cerrar').addEventListener('click', cerrarEditor);
+  edFondo.addEventListener('pointerdown', e => { if (e.target === edFondo) cerrarEditor(); });
+  $('ed-copiar').addEventListener('click', () => { asentar(); copiar(edCap); });
+  $('ed-guardar').addEventListener('click', () => { asentar(); guardar(edCap); });
+
+  // ── Funciones: la selección abraza el nombre activo y el panel de la derecha cambia con ella ──
+  const fnLista = $('fn-lista'), fnSel = $('fn-sel'), fnItems = [...fnLista.querySelectorAll('.fn-item')], unaColumna = matchMedia('(max-width: 900px)');
+  let fnActiva = -1;
+  const fnColocar = () => {
+    if (fnActiva < 0 || unaColumna.matches) return;
+    const o = fnLista.getBoundingClientRect(), b = fnItems[fnActiva].querySelector('.fn-nombre').getBoundingClientRect();
+    fnSel.style.transform = `translate(${b.left - o.left}px, ${b.top - o.top}px)`; fnSel.style.width = b.width + 'px'; fnSel.style.height = b.height + 'px';
+  };
+  function fnActivar(i) {
+    if (i === fnActiva || unaColumna.matches) return;
+    fnActiva = i;
+    fnItems.forEach((it, k) => { it.classList.toggle('activa', k === i); it.querySelector('.fn-nombre').setAttribute('aria-expanded', k === i); });
+    fnColocar();
+  }
+  fnItems.forEach((it, i) => {
+    const b = it.querySelector('.fn-nombre');
+    b.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') fnActivar(i); });
+    b.addEventListener('click', () => fnActivar(i)); b.addEventListener('focus', () => fnActivar(i));
+    b.addEventListener('keydown', e => { const d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0; if (d) { e.preventDefault(); fnItems[(i + d + fnItems.length) % fnItems.length].querySelector('.fn-nombre').focus(); } });
+  });
+  new ResizeObserver(fnColocar).observe(fnLista);
+  // Al entrar en vista la selección se dibuja sobre la primera; en una columna, cada demostración corre al asomarse.
+  new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); fnActivar(0); } }, { threshold: .3 }).observe(fnLista);
+  const fnVista = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && unaColumna.matches) { e.target.closest('.fn-item').classList.add('activa'); fnVista.unobserve(e.target); } }), { threshold: .5 });
+  fnItems.forEach(it => fnVista.observe(it.querySelector('.demo')));
+
+  // ── Barra de menús: el menú se abre al entrar en vista; «Capturar área» abre de verdad el selector ──
+  const nativa = $('nativa');
+  if (!quieto) document.documentElement.classList.add('anima');
+  $('menu').querySelectorAll('li, hr').forEach((el, i) => el.style.setProperty('--i', i));
+  new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); nativa.classList.add('vivo'); } }, { threshold: .45 }).observe($('menu'));
+  $('menu-capturar').addEventListener('click', abrir);
+
+  // ── Carrera: el parpadeo tarda 300 ms reales; Destello, 10 ──
+  const carrera = $('carrera'), barras = carrera.querySelectorAll('.pista-c i');
   const correr = () => {
     barras.forEach(b => { b.style.transition = 'none'; b.style.transform = 'scaleX(0)'; });
     void carrera.offsetWidth;
-    barras[0].style.transition = 'transform 300ms linear';
-    barras[1].style.transition = 'transform 10ms linear';
-    barras[0].style.transform = 'scaleX(1)';
-    barras[1].style.transform = 'scaleX(.0333)';
+    barras[0].style.transition = 'transform 300ms linear'; barras[1].style.transition = 'transform 10ms linear';
+    barras[0].style.transform = 'scaleX(1)'; barras[1].style.transform = 'scaleX(.0333)';
   };
-  document.getElementById('otra-vez').addEventListener('click', correr);
+  $('otra-vez').addEventListener('click', correr);
   if (quieto) { barras[0].style.transform = 'scaleX(1)'; barras[1].style.transform = 'scaleX(.0333)'; }
   else new IntersectionObserver(([e], o) => { if (e.isIntersecting) { setTimeout(correr, 250); o.disconnect(); } }, { threshold: .6 }).observe(carrera);
 
-  // Privacidad: la captura recorre tu Mac una sola vez.
-  const tuMac = document.getElementById('tu-mac');
+  // ── Privacidad: la captura recorre tu Mac una vez, y el atajo se graba como en Preferencias ──
+  const tuMac = $('tu-mac');
   if (!quieto) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { tuMac.classList.add('vivo'); o.disconnect(); } }, { threshold: .55 }).observe(tuMac);
   const recorrer = () => { if (quieto) return; tuMac.classList.remove('vivo'); void tuMac.offsetWidth; tuMac.classList.add('vivo'); };
-
-  // El atajo se graba como en Preferencias: mismas reglas y mismos avisos que la app.
-  const boton = document.getElementById('atajo');
-  const teclasEl = document.getElementById('atajo-teclas');
-  const nota = document.getElementById('atajo-nota');
-  const tactil = matchMedia('(hover: none)').matches;
+  const boton = $('atajo'), teclasEl = $('atajo-teclas'), nota = $('atajo-nota');
   const reposo = tactil ? 'Tu atajo · tócalo para cambiarlo' : 'Tu atajo · haz clic para cambiarlo';
   const NOMBRES = { '⌃': 'Control', '⌥': 'Opción', '⇧': 'Mayúsculas', '⌘': 'Comando' };
   const ESPECIALES = { Space: 'Espacio', Enter: '↩', Tab: '⇥', Escape: '⎋', Backspace: '⌫', Delete: '⌦',
@@ -686,44 +1017,32 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
     Minus: '-', Equal: '=', BracketLeft: '[', BracketRight: ']', Quote: "'", Semicolon: ';', Backslash: '\\', Comma: ',', Slash: '/', Period: '.', Backquote: '`' };
   const CHOQUES = { '⇧⌘3': 'macOS lo usa para sus capturas', '⇧⌘4': 'macOS lo usa para sus capturas', '⇧⌘5': 'macOS lo usa para sus capturas',
     '⌃⇧⌘3': 'macOS lo usa para sus capturas', '⌃⇧⌘4': 'macOS lo usa para sus capturas', '⌘Espacio': 'macOS lo usa para Spotlight' };
-  // e.code y no e.key: con ⌥, macOS cambia el carácter (⌥4 escribe «¢»).
-  const tecla = code => {
-    const m = /^(?:Key([A-Z])|Digit(\d)|F([1-9]|1\d|20))$/.exec(code);
-    return m ? (m[1] || m[2] || 'F' + m[3]) : ESPECIALES[code];
-  };
+  const tecla = code => { const m = /^(?:Key([A-Z])|Digit(\d)|F([1-9]|1\d|20))$/.exec(code); return m ? (m[1] || m[2] || 'F' + m[3]) : ESPECIALES[code]; };
   const modificadores = e => [e.ctrlKey && '⌃', e.altKey && '⌥', e.shiftKey && '⇧', e.metaKey && '⌘'].filter(Boolean);
   let atajo = ['⌥', '⇧', '⌘', '4'], grabando = false, muestra = 0;
-
-  const pintar = (lista, vacias = 0) => {
-    teclasEl.replaceChildren(...lista.map(k => Object.assign(document.createElement('kbd'), { textContent: k })),
-      ...Array.from({ length: vacias }, () => Object.assign(document.createElement('kbd'), { className: 'vacia' })));
-  };
+  const pintar = (lista, vacias = 0) => teclasEl.replaceChildren(...lista.map(k => Object.assign(document.createElement('kbd'), { textContent: k })),
+    ...Array.from({ length: vacias }, () => Object.assign(document.createElement('kbd'), { className: 'vacia' })));
   const avisar = (texto, aviso = false) => { nota.textContent = texto; nota.classList.toggle('aviso', aviso); };
   const rotular = () => boton.setAttribute('aria-label', 'Atajo: ' + atajo.map(k => NOMBRES[k] || k).join(' ') + '. Cambiar');
-  const empezar = () => {
-    grabando = true; boton.classList.add('grabando'); boton.removeAttribute('aria-label');
-    pintar([], 2); avisar('Pulsa tu combinación. Esc cancela.');
-  };
+  const empezar = () => { grabando = true; boton.classList.add('grabando'); boton.removeAttribute('aria-label'); pintar([], 2); avisar('Pulsa tu combinación. Esc cancela.'); };
   const terminar = (nuevo, texto) => {
     grabando = false; boton.classList.remove('grabando');
     if (nuevo) atajo = nuevo;
     pintar(atajo); rotular(); avisar(texto || reposo);
     if (nuevo) recorrer();
   };
-
   boton.addEventListener('click', e => {
     if (tactil) {
       const muestras = [['⇧', '⌘', '4'], ['⌃', '⌘', 'A'], ['⌥', 'Espacio'], ['⌃', '⌥', 'S'], ['⌥', '⇧', '⌘', '4']];
       return terminar(muestras[muestra++ % muestras.length], 'En tu Mac, el que elijas en Preferencias');
     }
-    if (!grabando) empezar();
-    else if (e.detail) terminar(null);
+    if (!grabando) empezar(); else if (e.detail) terminar(null);
   });
   boton.addEventListener('blur', () => { if (grabando) terminar(null); });
   boton.addEventListener('keyup', e => { if (grabando) { const m = modificadores(e); pintar(m, m.length ? 1 : 2); } });
   boton.addEventListener('keydown', e => {
     if (!grabando) return;
-    e.preventDefault();
+    e.preventDefault(); e.stopPropagation();
     const m = modificadores(e);
     if (['Control', 'Alt', 'Shift', 'Meta'].includes(e.key)) return pintar(m, 1);
     if (!m.length && e.code === 'Escape') return terminar(null);
@@ -734,8 +1053,14 @@ footer.pie .wrap { display: flex; justify-content: space-between; gap: 16px 32px
     const choque = CHOQUES[m.join('') + k];
     terminar([...m, k], choque ? choque + '; desactívalo en Ajustes' : 'Listo. Así se cambia en Preferencias');
   });
-  rotular();
+  rotular(); avisar(reposo);
+  if (tactil) { $('pista-teclas').hidden = true; $('pista-texto').textContent = '¿Quieres sentirlo? Toca aquí y'; }
 
+  // Con la fuente lista, la selección toma su medida real y se dibuja.
+  document.fonts.ready.then(() => {
+    seleccionar();
+    trazar();
+  });
 })();
 </script>
 </body>
