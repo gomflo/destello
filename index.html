@@ -86,12 +86,13 @@ section > .wrap::before { left: -8px; } section > .wrap::after { right: -8px; }
 /* La selección se dibuja al cargar: la palabra empieza apagada y se enciende hasta donde llega el cursor (--p). */
 .palabra.trazando { color: transparent; background: linear-gradient(90deg, var(--tinta) calc(var(--p, 0) * 100%), rgba(14,13,20,.26) calc(var(--p, 0) * 100%)); -webkit-background-clip: text; background-clip: text; }
 .palabra { cursor: pointer; }
-.palabra::after { content: ""; position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
-.palabra.destello::after { animation: destello .42s var(--ease) both; }
-@keyframes destello { from { opacity: .92; } to { opacity: 0; } }
+/* Al soltar, una franja de luz cruza las letras en el sentido del arrastre: el destello que da nombre a la app. */
+.palabra.destello { color: transparent; background: linear-gradient(110deg, var(--tinta) 46%, #fff 48%, #fff 49%, var(--tinta) 51%, var(--tinta) 52.2%, #fff 53.1%, var(--tinta) 54%) 100% 0 / 250% 100% no-repeat; -webkit-background-clip: text; background-clip: text; animation: destello .56s cubic-bezier(.3, 0, .2, 1) both; }
+@keyframes destello { to { background-position-x: 0; } }
 .h-cursor { position: absolute; z-index: 2; left: -12px; top: -12px; width: 24px; height: 24px; fill: none; stroke: var(--tinta); stroke-width: 1.5; pointer-events: none; }
 .h-chispa { position: absolute; z-index: 2; left: -30px; top: -30px; width: 60px; height: 60px; fill: var(--tinta); opacity: 0; pointer-events: none; }
-.h-chispa.salta { animation: chispa .7s var(--ease) both; }
+/* La estrella salta cuando la luz llega a la esquina. */
+.h-chispa.salta { animation: chispa .7s .3s var(--ease) both; }
 @keyframes chispa { 0% { opacity: 0; scale: .2; rotate: -40deg; } 30% { opacity: 1; scale: 1.15; rotate: 0deg; } 100% { opacity: 0; scale: .5; rotate: 25deg; } }
 .hero-sel .asa, .hero-sel .corte { transition: opacity .3s; }
 .hero-sel.trazando .asa, .hero-sel.trazando .corte { opacity: 0; transition: none; }
@@ -398,7 +399,7 @@ button.luz { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .btn, .preguntas summary .ico { transition: none; }
-  .palabra.destello::after, .h-chispa.salta, .esc *, .esc * * { animation: none !important; }
+  .palabra.destello, .h-chispa.salta, .esc *, .esc * * { animation: none !important; }
   .fn-sel, .fn-nombre { transition: none; }
   .tu-mac.vivo *, .tu-mac.vivo *::before, .tu-mac.vivo + .salida .cable i, #nativa.vivo .menu, #nativa.vivo .menu * { animation: none !important; }
 }
