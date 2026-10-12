@@ -1,9 +1,9 @@
 {
-  "version": "0.1.2",
-  "url": "downloads/Destello-0.1.2.dmg",
-  "size": 1379383,
-  "sha256": "40a7c9deb531608c8280f5e9f8cfde470c2d0d6b0f7c42a080e9a41d6bdeccd2",
+  "version": "0.1.3",
+  "url": "downloads/Destello-0.1.3.dmg",
+  "size": 1454504,
+  "sha256": "0f476319e419245c0d2bd1f5a6e4d9b7a0a1be2d6e08647c9e242b1ed26037e2",
   "minimum_os": "15.0",
-  "published": "2026-10-10",
-  "notes": "Las actualizaciones automáticas ya funcionan: el aviso de versiones nuevas apuntaba a una dirección equivocada."
+  "published": "2026-10-12",
+  "notes": "El selector aparece en el escritorio donde estás, sin saltar a otro. Vidrio nuevo en el destello de captura y al resaltar ventanas."
 }
